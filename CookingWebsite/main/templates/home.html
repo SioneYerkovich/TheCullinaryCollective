@@ -78,7 +78,7 @@
                   <div class="me-5">
                     <a href="#">
                       <btn type="button" class="text-black" alt="login icon">
-                        <i class="bi bi-person fs-3"></i>
+                        <i class="bi bi-person fs-2"></i>
                       </btn>
                     </a>
                   </div>
@@ -90,23 +90,33 @@
         <!-- This is the main section of the landing page-->
         <main>
             <!-- Landing page hero section -->
-            <div class="container">
+            <div class="container mt-5 pb-sm-5">
                 <div class="row">
                     <div class="col-md-6 col-sm-12 text-center">
-                            <img src="{% static 'main/images/poke.PNG' %}" class="mb-4 animate__animated animate__fadeIn"></img>
+                            <img src="{% static 'main/images/poke.PNG' %}" class="animate__animated animate__fadeIn"></img>
                     </div>
                     <div class="col-md-6 col-sm-12 text-center">
                         <div class=" d-sm-none d-md-block col-xs-12" style="height:70px;">
                         </div>
-                        <h1 class="mt-md-5 pt-md-5 mb-5 display-4 animate__animated animate__fadeIn">The Cullinary Collective.</h1>
+                        <h1 class="mt-md-5 pt-md-5 pt-sm-0 mb-5 display-4 animate__animated animate__fadeIn">The Cullinary Collective.</h1>
                         <h3 class="animate__animated animate__fadeIn">recipes that get your taste buds <span class="text-secondary">screaming</span></h3>
-                        <button type="button" class="btn btn-secondary animate__animated animate__fadeIn">Explore</button>
+                        <button type="button" class="btn mt-3 btn-secondary animate__animated animate__fadeIn">Explore</button>
                     </div>
                 </div>
             </div>
 
             <!-- User reviews carousel -->
-            <div class="container mt-5">
+            <!-- User reviews header -->
+            <div class="container text-center mt-5 pt-sm-5">
+              <h3>User reviews</h3>
+              <i class="bi bi-star-fill fs-3 text-primary"></i>
+              <i class="bi bi-star-fill fs-3 text-primary"></i>
+              <i class="bi bi-star-fill fs-3 text-primary"></i>
+              <i class="bi bi-star-fill fs-3 text-primary"></i>
+              <i class="bi bi-star-half fs-3 text-primary"></i>
+            </div>
+
+            <div class="container mt-5 mb-3">
                 <div id="carousel" class="carousel slide" data-bs-ride="carousel">
                   <!-- Carousel Inner (Slides) -->
                   <div class="carousel-inner">
@@ -148,7 +158,7 @@
             
                     <!-- Slide 2 -->
                     <div class="carousel-item">
-                      <div class="row">
+                      <div class="row gy-5">
                         <!-- User feedback card 4 -->
                         <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                           <div class="card">
@@ -196,10 +206,26 @@
                   </button>
                 </div>
               </div>
+
+              <div class="col-xs-12" style="height:300px;">
+              </div>
+
+              <!-- Chefs weekly special video section -->
+              <div class="container mt-5">
+                <div class="row justify-content-end">
+                  <!-- Heading text -->
+                  <div class="col-md-6 col-sm-12 text-center">
+                    <h1 class="mt-md-4 pt-md-5 mb-5 display-4">Chefs weekly special</h1>
+                    <h3 class="pb-sm-5">This week join chef as he creates a well-known <span class="text-secondary">delicacy</span></h3>
+                  </div>
+                  <!-- Video -->
+                  <iframe class="col-lg-6 col-md-6 col-sm-12" width="500" height="355" src="https://www.youtube.com/embed/zselTkZciUk?si=PxOH13zaeOEQnSlf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+              </div>
         </main>
         <footer>
             <!-- footer here -->
-           <div class="col-xs-12" style="height:100px;">
+           <div class="col-xs-12" style="height:200px;">
            </div>
  
          <div class="text-center mt-5 bg-primary pt-4">
