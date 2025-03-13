@@ -18,16 +18,38 @@
             crossorigin="anonymous"
         />
         <!--Bootstrap stylesheets included below-->
+        <!-- Bootstrap icons stylesheet -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- Bootswatch theme stylesheet -->
         <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-        <link rel="stylesheet" href=""
+        <!-- animate css stylesheet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
             <!-- custom css styling for navbar header underlines -->
         <style>
+            /* navbar header underlining on hover */
             .navHeader:hover {
             text-decoration: underline;
             text-decoration-color: white;
+            }
+            /* Underlining the daily recipe headers on hover */
+            .dailyrecipe:hover {
+            text-decoration: underline;
+            text-decoration-color: #f4a5a8;
+            }
+            /* Changing anchortags to no longer have an underline by default, only on hover */
+            a {
+            text-decoration: none;
+            }
+            /* The zoom animation */
+            .zoom {
+            transition: transform .2s;
+            }
+            /* zoom strength and opacity */
+            .zoom:hover {
+            transform: scale(1.05);
+            opacity: 0.9!important;
+            filter: brightness(0.6) !important;
             }
         </style>
     </head>
@@ -51,7 +73,7 @@
                     <!-- Home button -->
                     <li class="nav-item me-3 mb-1">
                       <a class="nav-link text-dark" href="{% url 'TCC-home' %}">
-                        <h5 class="ms-md-5 me-4 text-light navHeader">Home</h5>
+                        <h5 class="ms-lg-5 me-4 text-light navHeader">Home</h5>
                       </a>
                     </li>
                     <!-- Daily recipes button -->
@@ -63,7 +85,7 @@
                       <div class="dropdown-menu" data-bs-popper="static">
                         <a class="dropdown-item" href="{% url 'daily-recipes-breakfast' %}">Breakfast</a>
                         <a class="dropdown-item" href="{% url 'daily-recipes-lunch' %}">Lunch</a>
-                        <a class="dropdown-item" href="#">Dinner</a>
+                        <a class="dropdown-item" href="{% url 'daily-recipes-dinner' %}">Dinner</a>
                       </div>
                     </li>
                     <!-- Health and diet button -->
@@ -97,9 +119,9 @@
             </div>
             <!-- Hero section -->
              <div class="container my-5">
-                <h1 class="display-4 animate__animated animate__fadeIn">The Cullinary Collective.</h1>
-                <h3 class="animate__animated animate__fadeIn mb-5">Daily recipe ideas: <span class="text-secondary">Lunch recipes</span></h3>
-                <h1 class="fst-italic lead animate__animated animate__fadeIn">Lunch: The most important meal of the day... until dinner, that is.</h1>
+                <h1 class="display-4 animate__animated animate__fadeIn text-md-start text-center">The Cullinary Collective.</h1>
+                <h3 class="animate__animated animate__fadeIn mb-5 text-md-start text-center">Daily recipe ideas: <span class="text-secondary">Lunch recipes</span></h3>
+                <h1 class="fst-italic lead animate__animated animate__fadeIn text-md-start text-center">Lunch: The most important meal of the day... until dinner, that is.</h1>
              </div>
 
              <div class="col-xs-12" style="height:100px;">
@@ -110,36 +132,35 @@
                     <!-- recipe card 1-->
                     <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                         <div class="card border-0">
-                            <img src="{% static 'main/images/pancakes.jpg' %}" class="card-img-top img-fluid animate__animated animate__fadeIn" alt="Recipe 1">
+                            <a href="#"><img src="{% static 'main/images/caesar.jpg' %}" class="zoom card-img-top img-fluid animate__animated animate__fadeIn" alt="Recipe 1"></a>
                             <div class="card-body">
-                                <h5 class="card-title text-dark text-center my-4">BUTTERMILK PANCAKES</h5>
-                                <p class="card-text text-center">"Breakfast is covered today with a classic Buttermilk Pancakes recipe. 
-                                    Showing you how to make thick, fluffy pancakes that can be ready in under 15 minutes!"</p>
-                                <p class="text-center text-secondary">- <span class="text-secondary">Sam Merritt</span></p>
+                                <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">CAESAR SALAD</h5></a>
+                                <p class="card-text text-center">"Most people buy Caesar salad dressing in a bottle, homemade is incredibly easy to make and tastes so much better than store-bought.
+                                     There are many variations, but this rich and creamy version is the one my whole family loves."</p>
+                                <p class="text-center text-secondary">- <span class="text-secondary">Jennifer Segal</span></p>
                             </div>
                         </div>
                     </div>
                     <!-- recipe card 2 -->
                     <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                         <div class="card border-0">
-                        <img src="{% static 'main/images/shakshouka.jpg' %}" class="card-img-top animate__animated animate__fadeIn" alt="Recipe 2">
+                        <a href="#"><img src="{% static 'main/images/gyoza.jpg' %}" class="zoom card-img-top animate__animated animate__fadeIn" alt="Recipe 2"></a>
                         <div class="card-body">
-                            <h5 class="card-title text-dark text-center my-4">SHAKSHUKA</h5>
-                            <p class="card-text text-center">"Shakshuka is an easy, healthy meal in Israel and other parts of the Middle East and North Africa.
-                                 It’s a simple combination of simmering tomatoes, onions, garlic, spices and gently poached eggs.
-                                 It’s nourishing, filling and one recipe I guarantee you’ll make time and again."</p>
-                            <p class="text-center text-secondary">- <span class="text-secondary">Lisa Bryan</span></p>
+                            <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">JAPANESE GYOZA</h5></a>
+                            <p class="card-text text-center">"This Japanese Gyoza recipe is my mothers’, and it’s a traditional, authentic recipe. 
+                                Juicy on the inside, a golden brown and crispy base, these are made in a skillet and are one of my all time favourite Japanese dishes!"</p>
+                            <p class="text-center text-secondary">- <span class="text-secondary">Nagi</span></p>
                         </div>
                         </div>
                     </div>
                     <!-- recipe card 3 -->
                     <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                         <div class="card border-0">
-                        <img src="{% static 'main/images/eggsbenny.jpg' %}" class="card-img-top animate__animated animate__fadeIn" alt="Recipe 3">
+                        <a href="#"><img src="{% static 'main/images/margherita.jpg' %}" class="zoom card-img-top animate__animated animate__fadeIn" alt="Recipe 3"></a>
                         <div class="card-body">
-                            <h5 class="card-title text-dark text-center my-4">SALMON EGGS BENEDICT</h5>
-                            <p class="card-text text-center">"Smoked salmon, poached eggs, toasted English muffin, and a homemade hollandaise sauce come together for a decadent dish that’s still surprisingly simple to pull together."</p>
-                            <p class="text-center text-secondary">- <span class="text-secondary">Ksenia Prints</span></p>
+                            <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">MARGHERITA PIZZA</h5></a>
+                            <p class="card-text text-center">"Margherita is the original pizza flavour, with just three toppings – tomato, basil and mozzarella; a simple, but sublime combination!"</p>
+                            <p class="text-center text-secondary">- <span class="text-secondary">Nadia Lim</span></p>
                         </div>
                         </div>
                     </div>

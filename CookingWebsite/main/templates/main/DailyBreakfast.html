@@ -18,17 +18,40 @@
             crossorigin="anonymous"
         />
         <!--Bootstrap stylesheets included below-->
+        <!-- Bootstrap icons stylesheet -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- Bootswatch theme stylesheet -->
         <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-        <link rel="stylesheet" href=""
+        <!-- animate css stylesheet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
             <!-- custom css styling for navbar header underlines -->
         <style>
+            /* navbar header underlining on hover */
             .navHeader:hover {
             text-decoration: underline;
             text-decoration-color: white;
             }
+            /* Underlining the daily recipe headers on hover */
+            .dailyrecipe:hover {
+            text-decoration: underline;
+            text-decoration-color: #f4a5a8;
+            }
+            /* Changing anchortags to no longer have an underline by default, only on hover */
+            a {
+            text-decoration: none;
+            }
+            /* The zoom animation */
+            .zoom {
+            transition: transform .2s;
+            }
+            /* zoom strength and opacity */
+            .zoom:hover {
+            transform: scale(1.05);
+            opacity: 0.9!important;
+            filter: brightness(0.6) !important;
+            }
+            
         </style>
     </head>
 
@@ -36,61 +59,61 @@
         <header class="bg-primary">
             <!-- Navbar here (COMPLETED) -->
             <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
-                <div class="container-fluid">
+              <div class="container-fluid">
                 <!-- Navbar logo -->
                 <div class="ms-md-5">
-                    <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid navLogo" width="300px" alt="TCC logo">
+                  <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid navLogo" width="300px" alt="TCC logo">
                 </div>
                 <!-- Collapsed hamburger -->
                 <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false">
-                    <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse mt-2" id="navbarColor01">
-                    <!-- List for the navbar headers -->
-                    <ul class="navbar-nav me-auto">
+                  <!-- List for the navbar headers -->
+                  <ul class="navbar-nav me-auto">
                     <!-- Home button -->
                     <li class="nav-item me-3 mb-1">
-                        <a class="nav-link text-dark" href="{% url 'TCC-home' %}">
-                        <h5 class="ms-md-5 me-4 text-light navHeader">Home</h5>
-                        </a>
+                      <a class="nav-link text-dark" href="{% url 'TCC-home' %}">
+                        <h5 class="ms-lg-5 me-4 text-light navHeader">Home</h5>
+                      </a>
                     </li>
                     <!-- Daily recipes button -->
                     <li class="nav-item dropdown me-3 mb-1">
-                        <a class="nav-link" data-bs-toggle="dropdown" role="button">
+                      <a class="nav-link" data-bs-toggle="dropdown" role="button">
                         <h5 class="me-4 text-white dropdown-toggle navHeader">Daily Recipe</h5>
-                        </a>
-                        <!-- Dropdown menu for daily recipes -->
-                        <div class="dropdown-menu" data-bs-popper="static">
+                      </a>
+                      <!-- Dropdown menu for daily recipes -->
+                      <div class="dropdown-menu" data-bs-popper="static">
                         <a class="dropdown-item" href="{% url 'daily-recipes-breakfast' %}">Breakfast</a>
                         <a class="dropdown-item" href="{% url 'daily-recipes-lunch' %}">Lunch</a>
-                        <a class="dropdown-item" href="#">Dinner</a>
-                        </div>
+                        <a class="dropdown-item" href="{% url 'daily-recipes-dinner' %}">Dinner</a>
+                      </div>
                     </li>
                     <!-- Health and diet button -->
                     <li class="nav-item me-3 mb-1">
-                        <a class="nav-link text-dark" href="#">
+                      <a class="nav-link text-dark" href="#">
                         <h5 class="me-4 text-white text-nowrap navHeader">Health & Diet</h5>
-                        </a>
+                      </a>
                     </li>
                     <!-- Holidays button -->
                     <li class="nav-item me-3 mb-1">
-                        <a class="nav-link text-dark" href="#">
+                      <a class="nav-link text-dark" href="#">
                         <h5 class="text-light navHeader">Holidays</h5>
-                        </a>
+                      </a>
                     </li>
-                    </ul>
-                    <!-- Login icon & button -->
-                    <div class="me-5">
+                  </ul>
+                  <!-- Login icon & button -->
+                  <div class="me-5">
                     <a href="#">
-                        <btn type="button" class="text-black" alt="login icon">
+                      <btn type="button" class="text-black" alt="login icon">
                         <i class="bi bi-person fs-2"></i>
-                        </btn>
+                      </btn>
                     </a>
-                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </nav>
-            </header>
+          </header>
         <!-- Main body content of recipe page -->
         <main>
             <div class="col-xs-12" style="height:50px;">
@@ -110,11 +133,12 @@
                     <!-- recipe card 1-->
                     <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                         <div class="card border-0">
-                            <img src="{% static 'main/images/pancakes.jpg' %}" class="card-img-top img-fluid animate__animated animate__fadeIn" alt="Recipe 1">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#pancakeModal"><img src="{% static 'main/images/pancakes.jpg' %}" class="zoom image card-img-top img-fluid animate__animated animate__fadeIn" alt="Recipe 1"></a>
                             <div class="card-body">
-                                <h5 class="card-title text-dark text-center my-4">BUTTERMILK PANCAKES</h5>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#pancakeModal"><h5 class="dailyrecipe card-title text-dark text-center my-4">BUTTERMILK PANCAKES</h5></a>
                                 <p class="card-text text-center">"Breakfast is covered today with a classic Buttermilk Pancakes recipe. 
-                                    Showing you how to make thick, fluffy pancakes that can be ready in under 15 minutes!"</p>
+                                    Showing you how to make thick, fluffy pancakes that can be ready in under 15 minutes!"
+                                </p>
                                 <p class="text-center text-secondary">- <span class="text-secondary">Sam Merritt</span></p>
                             </div>
                         </div>
@@ -122,29 +146,87 @@
                     <!-- recipe card 2 -->
                     <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                         <div class="card border-0">
-                        <img src="{% static 'main/images/shakshouka.jpg' %}" class="card-img-top animate__animated animate__fadeIn" alt="Recipe 2">
-                        <div class="card-body">
-                            <h5 class="card-title text-dark text-center my-4">SHAKSHUKA</h5>
-                            <p class="card-text text-center">"Shakshuka is an easy, healthy meal in Israel and other parts of the Middle East and North Africa.
-                                 It’s a simple combination of simmering tomatoes, onions, garlic, spices and gently poached eggs.
-                                 It’s nourishing, filling and one recipe I guarantee you’ll make time and again."</p>
-                            <p class="text-center text-secondary">- <span class="text-secondary">Lisa Bryan</span></p>
-                        </div>
+                            <a href="#"><img src="{% static 'main/images/shakshouka.jpg' %}" class="zoom card-img-top animate__animated animate__fadeIn" alt="Recipe 2"></a>
+                            <div class="card-body">
+                                <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">SHAKSHUKA</h5></a>
+                                <p class="card-text text-center">"Shakshuka is an easy, healthy meal in Israel and other parts of the Middle East and North Africa.
+                                    It’s a simple combination of simmering tomatoes, onions, garlic, spices and gently poached eggs.
+                                    It’s nourishing, filling and one recipe I guarantee you’ll make time and again."
+                                </p>
+                                <p class="text-center text-secondary">- <span class="text-secondary">Lisa Bryan</span></p>
+                            </div>
                         </div>
                     </div>
                     <!-- recipe card 3 -->
                     <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                         <div class="card border-0">
-                        <img src="{% static 'main/images/eggsbenny.jpg' %}" class="card-img-top animate__animated animate__fadeIn" alt="Recipe 3">
-                        <div class="card-body">
-                            <h5 class="card-title text-dark text-center my-4">SALMON EGGS BENEDICT</h5>
-                            <p class="card-text text-center">"Smoked salmon, poached eggs, toasted English muffin, and a homemade hollandaise sauce come together for a decadent dish that’s still surprisingly simple to pull together."</p>
-                            <p class="text-center text-secondary">- <span class="text-secondary">Ksenia Prints</span></p>
-                        </div>
+                            <a href="#"><img src="{% static 'main/images/eggsbenny.jpg' %}" class="zoom card-img-top animate__animated animate__fadeIn" alt="Recipe 3"></a>
+                            <div class="card-body">
+                                <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">SALMON EGGS BENEDICT</h5></a>
+                                <p class="card-text text-center">"Smoked salmon, poached eggs, toasted English muffin, and a homemade hollandaise sauce come together for a decadent dish that’s still surprisingly simple to pull together."</p>
+                                <p class="text-center text-secondary">- <span class="text-secondary">Ksenia Prints</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Modals section for recipes display (on-click) -->
+            <!-- Pancakes recipe modal -->
+            <div class="modal fade" id="pancakeModal" tabindex="-1" role="dialog" aria-labelledby="pancakeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="pancakeModalLabel">Buttermilk Pancakes recipe</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- modal body content (everything after the title) -->
+                    <div class="modal-body">
+                        <div class="container mb-3">
+                            <div class="row">
+                                <img class="col-md-4" src="{% static 'main/images/pancakes.jpg' %}">
+                                    <div class="col-md-8">
+                                        <h5 class="mb-3">Recipe by: <span class="text-secondary">Sam Merritt</span></h5>
+                                        <p>Buttermilk pancakes are an American classic breakfast food, but despite their unfussy ingredient list, too often people grab for the box mix because it’s just “easier”.
+                                             Too many home bakers have struggled with dense, flat, or rubbery pancakes, or ones that have charred exteriors, raw centers, or are just all-around lacking in flavor.
+                                              Today we’re going to fix that with my favorite, fool-proof buttermilk pancake recipe.
+                                        </p>
+                                    </div>
+                            </div>
+                        </div>
+                      <!-- Accordion inside modal -->
+                      <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <!-- Ingredients panel -->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                              Ingredients
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                              This is the first item's accordion body.
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Cooking instructions panel -->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                              Cooking Instructions
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                              This is the second item's accordion body.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </main>
         <footer>
             <!-- footer here -->
