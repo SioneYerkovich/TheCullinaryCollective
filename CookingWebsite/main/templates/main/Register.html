@@ -32,7 +32,7 @@
             text-decoration: underline;
             text-decoration-color: white;
             }
-            /* Changing anchortags to no longer have an underline by default, only on hover */
+            /* Changing redirect to no longer have an underline by default, only on hover */
             .redirect {
             text-decoration: none;
             }
@@ -40,6 +40,7 @@
             text-decoration: underline;
             text-decoration-color: #78C2AD;
             }
+
         </style>
     </head>
 
@@ -105,10 +106,20 @@
         <main>
           <div class="col-xs-12" style="height:200px;">
           </div>
-
+          <!-- Sign up form -->
+          <!-- these are the input fields -->
           <div class="container d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn">
-            <h5 class="display-4 mb-5">Login</h5>
-            <form class="col-md-6 col-lg-4 col-sm-8">
+            <h5 class="display-4 mb-5">Sign up</h5>
+            <form method="POST" action="{% url 'TCC-register' %}" class="col-md-6 col-lg-4 col-sm-8">
+              {% csrf_token %}
+              <div class="form-floating mb-3">
+                <input type="text" id="floatingfname" placeholder="First Name" class="form-control" pattern="^[^0-9]*$" title="Numbers are not allowed" aria-describedby="first name" name="fname" required>
+                <label for="floatingfname">First Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" id="floatinglname" placeholder="Last Name" class="form-control" pattern="^[^0-9]*$" title="Numbers are not allowed" aria-describedby="last name" name="lname" required>
+                <label for="floatinglname">Last Name</label>
+              </div>
               <div class="form-floating mb-3">
                 <input type="email" id="floatingemail" placeholder="Email Address" class="form-control" aria-describedby="email" name="email" required>
                 <label for="floatingemail">Email address</label>
@@ -116,11 +127,11 @@
               <div class="form-floating mb-3">
                 <input type="password" id="floatingpw" placeholder="Password" class="form-control" aria-describedby="password" name="password" required>
                 <label for="floatingpw">Password</label>
-                <a href="#" class="register redirect"><p class="ms-1 mt-1 text-primary"><small>Forgot password?</small></p></a>
               </div>
+              <!-- this is the register button & link back to log in page -->
               <div class="d-flex justify-content-center flex-column align-items-center">
-                <button type="submit" class="btn btn-secondary mt-5 col-md-12 col-lg-12 col-sm-12" style="border-radius: 1000px">Log in</button>
-                <a href="{% url 'TCC-register' %}" class="redirect"><p class="ms-1 mt-1 text-primary"><small>Register an account</small></p></a>
+                <button type="submit" class="btn btn-secondary mt-5 col-md-12 col-lg-12 col-sm-12" style="border-radius: 1000px">Register</button>
+                <a href="{% url 'TCC-login' %}" class="redirect"><p class="ms-1 mt-1 text-primary"><small>Already have an account?</small></p></a>
               </div>
             </form>
           </div>
