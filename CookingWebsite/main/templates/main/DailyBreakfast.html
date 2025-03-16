@@ -62,7 +62,7 @@
               <div class="container-fluid">
                 <!-- Navbar logo -->
                 <div class="ms-md-5">
-                  <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid navLogo" width="300px" alt="TCC logo">
+                  <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300px" alt="TCC logo">
                 </div>
                 <!-- Collapsed hamburger -->
                 <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false">
@@ -104,7 +104,7 @@
                   </ul>
                   <!-- Login icon & button -->
                   <div class="me-5">
-                    <a href="#">
+                    <a href="{% url 'login' %}">
                       <btn type="button" class="text-black" alt="login icon">
                         <i class="bi bi-person fs-2"></i>
                       </btn>
