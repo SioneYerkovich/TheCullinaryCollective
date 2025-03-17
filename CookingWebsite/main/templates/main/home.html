@@ -82,11 +82,19 @@
               </ul>
               <!-- Login icon & button -->
               <div class="me-5">
-                <a href="{% url 'TCC-login' %}">
+                {% if user.is_authenticated %}
+                <a href="{% url 'TCC-logout' %}">
                   <btn type="button" class="text-black" alt="login icon">
-                    <i class="bi bi-person fs-2"></i>
+                    <i class="bi bi-door-closed fs-2"></i>
                   </btn>
                 </a>
+                {% else %}
+                  <a href="{% url 'TCC-login' %}">
+                    <btn type="button" class="text-black" alt="login icon">
+                      <i class="bi bi-person fs-2"></i>
+                    </btn>
+                  </a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -230,39 +238,41 @@
               </div>
         </main>
         <footer>
-            <!-- footer here -->
-           <div class="col-xs-12" style="height:200px;">
-           </div>
- 
-         <div class="text-center mt-5 bg-primary pt-4">
-           <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
-           <div class="text-center mt-4">
-             <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Instagram link icon">
-                <i class="bi bi-instagram text-white"><span class="visually-hidden">Instagram Icon</span></i>
-              </a>
-              </btn>
-             <a href="https://www.facebook.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Facebook link icon">
-                <i class="bi bi-facebook text-white"><span class="visually-hidden">Facebook Icon</span></i>
-              </a>
-              </btn>
-             <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="LinkedIn link icon">
-               <i class="bi bi-linkedin text-white"><span class="visually-hidden">LinkedIn Icon</span></i>
+          <!-- footer here -->
+      <div class="col-xs-12" style="height:200px;">
+      </div>
+        <!-- this is the icon content of the footer -->
+        <div class="text-center mt-5 bg-primary pt-4">
+          <!-- the TCC logo -->
+          <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
+          <!-- footer social media icons -->
+          <div class="text-center mt-4">
+            <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Instagram link icon">
+               <i class="bi bi-instagram text-white"><span class="visually-hidden">Instagram Icon</span></i>
              </a>
              </btn>
-             <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-black" style="font-size: 2.5rem" alt="Github link icon">
-               <i class="bi bi-github text-white"><span class="visually-hidden">Github Icon</span></i>
+            <a href="https://www.facebook.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Facebook link icon">
+               <i class="bi bi-facebook text-white"><span class="visually-hidden">Facebook Icon</span></i>
              </a>
              </btn>
+            <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="LinkedIn link icon">
+              <i class="bi bi-linkedin text-white"><span class="visually-hidden">LinkedIn Icon</span></i>
+            </a>
+            </btn>
+            <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-black" style="font-size: 2.5rem" alt="Github link icon">
+              <i class="bi bi-github text-white"><span class="visually-hidden">Github Icon</span></i>
+            </a>
+            </btn>
+          </div>
+        </div>
+        <!-- descriptions below the icons -->
+        <div class="text-center p-3 bg-primary text-white pt-5">
+           <div class="mb-2">
+               Find me on github: SioneYerkovich
            </div>
-         </div>
- 
-         <div class="text-center p-3 bg-primary text-white pt-5">
-            <div class="mb-2">
-                Find me on github: SioneYerkovich
-            </div>
-           © 2025 Copyright: Sione Yerkovich. All rights Reserved.
-         </div>
-       </footer>
+          © 2025 Copyright: Sione Yerkovich. All rights Reserved.
+        </div>
+      </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

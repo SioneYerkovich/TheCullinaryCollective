@@ -103,11 +103,19 @@
                   </ul>
                   <!-- Login icon & button -->
                   <div class="me-5">
-                    <a href="{% url 'TCC-login' %}">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'TCC-logout' %}">
                       <btn type="button" class="text-black" alt="login icon">
-                        <i class="bi bi-person fs-2"></i>
+                        <i class="bi bi-door-closed fs-2"></i>
                       </btn>
                     </a>
+                    {% else %}
+                      <a href="{% url 'TCC-login' %}">
+                        <btn type="button" class="text-black" alt="login icon">
+                          <i class="bi bi-person fs-2"></i>
+                        </btn>
+                      </a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -173,9 +181,9 @@
         </div>
           <!-- this is the icon content of the footer -->
           <div class="text-center mt-5 bg-primary pt-4">
-            <!-- this is the TCC logo -->
+            <!-- the TCC logo -->
             <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
-            <!-- these are the social media icons -->
+            <!-- footer social media icons -->
             <div class="text-center mt-4">
               <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Instagram link icon">
                  <i class="bi bi-instagram text-white"><span class="visually-hidden">Instagram Icon</span></i>
@@ -195,7 +203,7 @@
               </btn>
             </div>
           </div>
-          <!-- these are the descriptions below the icons -->
+          <!-- descriptions below the icons -->
           <div class="text-center p-3 bg-primary text-white pt-5">
              <div class="mb-2">
                  Find me on github: SioneYerkovich
