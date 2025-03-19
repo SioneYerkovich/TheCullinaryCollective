@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,3 +127,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings for SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# The SMTP server (e.g., Gmail)
+EMAIL_HOST = 'smtp.gmail.com'  
+# Port for TLS
+EMAIL_PORT = '587'  
+# Use TLS (Transport Layer Security)
+EMAIL_USE_TLS = True  
+# Your email address
+EMAIL_HOST_USER = 'tcc.pwreset@gmail.com'  
+# Your gmail app password
+EMAIL_HOST_PASSWORD = 'oggn ohis nhhc lvgq'
+#ppaognajd

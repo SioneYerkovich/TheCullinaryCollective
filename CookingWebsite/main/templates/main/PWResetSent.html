@@ -106,34 +106,10 @@
           <div class="col-xs-12" style="height:200px;">
           </div>
 
-        <!-- main body content for the login page  -->
+        <!-- main body content for the PW rcovery page  -->
           <div class="container d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn">
-          <!-- this is the alert message for a successful user registration. it is being redirected from views.py -->
-              {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                {% endfor %}
-              {% endif %}
-              <h5 class="display-4 mb-5">Login</h5>
-              <form method="POST" action="{% url 'TCC-login' %}" class="col-md-6 col-lg-4 col-sm-8">
-                {% csrf_token %}
-                <div class="form-floating mb-3">
-                  <input type="text" id="floatingusername" placeholder="Username" class="form-control" aria-describedby="username" name="username" required>
-                  <label for="floatingusername">Username</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="password" id="floatingpw" placeholder="Password" class="form-control" aria-describedby="password" name="password" required>
-                  <label for="floatingpw">Password</label>
-                  <a href="{% url 'password_reset' %}" class="register redirect"><p class="ms-1 mt-1 text-primary"><small>Forgot password?</small></p></a>
-                </div>
-                <div class="d-flex justify-content-center flex-column align-items-center">
-                  <button type="submit" class="btn btn-secondary mt-5 col-md-12 col-lg-12 col-sm-12" style="border-radius: 1000px">Log in</button>
-                  <a href="{% url 'TCC-register' %}" class="redirect"><p class="ms-1 mt-1 text-primary"><small>Register an account</small></p></a>
-                </div>
-              </form>
+              <h5 class="display-4 mb-5">Reset Password</h5>
+              <h1 class="col-8 lead animate__animated animate__fadeIn text-center mb-5">We've emailed you instructions to reset your password, if an account exists with the email you entered. You should receive them shortly. If you dont receive an email, please make sure you entered the address you registered with and check your spam folder.</h1>
           </div>
         </main>
         <footer>

@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
+from django.contrib.auth import views as auth_views
 
 # Create your views here.
 #Function that will return the home.html template and render it to the browser
@@ -27,6 +28,7 @@ def holidays_view(response):
     return HttpResponse("<h1>This is the holidays page<h1>")
 
 #Function that will return the Login.html template and render it to the browser
+#if the user submits the form, it will validate the details and log in
 def login_view(response):
     if response.method == 'POST':
         username = response.POST["username"]
@@ -41,6 +43,7 @@ def login_view(response):
     else:
         return render(response, "main/Login.html")
     
+#Function that will log out the user, display a message and render the login page
 def logout_user(response):
     logout(response)
     messages.success(response, ("You have been logged out."))
