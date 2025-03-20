@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Recipe
 from django import forms
 
 class RegisterUserForm(UserCreationForm):
@@ -17,3 +18,12 @@ class RegisterUserForm(UserCreationForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control mb-3'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+class CreateUserRecipe(Recipe):
+    recipeName = forms.CharField(max_length=100)
+    image = forms.ImageField()
+    author = forms.CharField(max_length=50)
+    ingredients = forms.CharField()
+    instructions = forms.CharField()
+    category = forms.CharField(max_length=50)
+    subcategory = forms.CharField(max_length=50)

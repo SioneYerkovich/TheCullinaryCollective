@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>TCC - Reset Password</title>
+        <title>TCC - Login</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -32,7 +32,7 @@
             text-decoration: underline;
             text-decoration-color: white;
             }
-            /* Changing anchortags to no longer have an underline by default, only on hover */
+            /* Changing redirect to no longer have an underline by default, only on hover */
             .redirect {
             text-decoration: none;
             }
@@ -40,6 +40,7 @@
             text-decoration: underline;
             text-decoration-color: #78C2AD;
             }
+
         </style>
     </head>
 
@@ -125,51 +126,57 @@
         <main>
           <div class="col-xs-12" style="height:200px;">
           </div>
-
-        <!-- main body content for the PW rcovery page  -->
+          <!-- Sign up form -->
+          <!-- these are the input fields -->
           <div class="container d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn">
-              <h5 class="display-4 mb-5">Reset Password</h5>
-              <h1 class="col-8 lead animate__animated animate__fadeIn text-center mb-5">We've emailed you instructions to reset your password, if an account exists with the email you entered. You should receive them shortly. If you dont receive an email, please make sure you entered the address you registered with and check your spam folder.</h1>
+            <h5 class="display-4 mb-5">Sign up</h5>
+            <form method="POST" action="{% url 'TCC-register' %}" class="col-md-6 col-lg-6 col-sm-8">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <!-- this is the register button & link back to log in page -->
+              <div class="d-flex justify-content-center flex-column align-items-center">
+                <button type="submit" class="btn btn-secondary mt-5 col-md-12 col-lg-12 col-sm-12" style="border-radius: 1000px">Register</button>
+                <a href="{% url 'TCC-login' %}" class="redirect"><p class="ms-1 mt-1 text-primary"><small>Already have an account?</small></p></a>
+              </div>
+            </form>
           </div>
         </main>
         <footer>
             <!-- footer here -->
-            <footer>
-              <!-- footer here -->
-          <div class="col-xs-12" style="height:200px;">
+        <div class="col-xs-12" style="height:200px;">
+        </div>
+          <!-- this is the icon content of the footer -->
+          <div class="text-center mt-5 bg-primary pt-4">
+            <!-- the TCC logo -->
+            <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
+            <!-- footer social media icons -->
+            <div class="text-center mt-4">
+              <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Instagram link icon">
+                 <i class="bi bi-instagram text-white"><span class="visually-hidden">Instagram Icon</span></i>
+               </a>
+               </btn>
+              <a href="https://www.facebook.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Facebook link icon">
+                 <i class="bi bi-facebook text-white"><span class="visually-hidden">Facebook Icon</span></i>
+               </a>
+               </btn>
+              <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="LinkedIn link icon">
+                <i class="bi bi-linkedin text-white"><span class="visually-hidden">LinkedIn Icon</span></i>
+              </a>
+              </btn>
+              <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-black" style="font-size: 2.5rem" alt="Github link icon">
+                <i class="bi bi-github text-white"><span class="visually-hidden">Github Icon</span></i>
+              </a>
+              </btn>
+            </div>
           </div>
-            <!-- this is the icon content of the footer -->
-            <div class="text-center mt-5 bg-primary pt-4">
-              <!-- the TCC logo -->
-              <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
-              <!-- footer social media icons -->
-              <div class="text-center mt-4">
-                <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Instagram link icon">
-                   <i class="bi bi-instagram text-white"><span class="visually-hidden">Instagram Icon</span></i>
-                 </a>
-                 </btn>
-                <a href="https://www.facebook.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Facebook link icon">
-                   <i class="bi bi-facebook text-white"><span class="visually-hidden">Facebook Icon</span></i>
-                 </a>
-                 </btn>
-                <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="LinkedIn link icon">
-                  <i class="bi bi-linkedin text-white"><span class="visually-hidden">LinkedIn Icon</span></i>
-                </a>
-                </btn>
-                <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-black" style="font-size: 2.5rem" alt="Github link icon">
-                  <i class="bi bi-github text-white"><span class="visually-hidden">Github Icon</span></i>
-                </a>
-                </btn>
-              </div>
-            </div>
-            <!-- descriptions below the icons -->
-            <div class="text-center p-3 bg-primary text-white pt-5">
-               <div class="mb-2">
-                   Find me on github: SioneYerkovich
-               </div>
-              © 2025 Copyright: Sione Yerkovich. All rights Reserved.
-            </div>
-          </footer>
+          <!-- descriptions below the icons -->
+          <div class="text-center p-3 bg-primary text-white pt-5">
+             <div class="mb-2">
+                 Find me on github: SioneYerkovich
+             </div>
+            © 2025 Copyright: Sione Yerkovich. All rights Reserved.
+          </div>
+        </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
