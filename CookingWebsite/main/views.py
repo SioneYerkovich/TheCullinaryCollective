@@ -90,21 +90,12 @@ def recipe_book_view(request):
 
 def edit_recipe_view(request, recipe_id):
     recipe = Recipe.objects.get(id = recipe_id)
-    if request.method == 'POST':
-        form = RecipeForm(request.POST, request.FILES, instance=recipe)
-        if form.is_valid():
-            form.save()
-            messages.success(request,("Voila! Your recipe has been updated."))
-            return redirect('recipe-book')
-        else:
-            print("form is invalid", form.errors)
+    form = RecipeForm(request.POST, request.FILES, instance=recipe or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request,("Voilà! Your recipe has been updated."))
+        return redirect('recipe-book')
     else:
         form = RecipeForm(instance = recipe)
-        print("Form instance data:", form.instance)  # Debugging line to check form data
 
-    if request.user.is_authenticated:
-        user_recipes = Recipe.objects.filter(user=request.user)
-    else:
-        user_recipes = []
-
-    return render(request, 'main/RecipeBook.html', {'form': form, 'recipes': user_recipes})
+    return render(request, 'main/EditRecipe.html', {'form': form,'recipe': recipe})
