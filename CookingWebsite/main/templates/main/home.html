@@ -99,15 +99,15 @@
                   </div>
                 </li>
               </ul>
-              <!-- Login icon & button -->
+              <!-- Navbar icons & buttons -->
               <div class="me-5">
                 {% if user.is_authenticated %}
-                <a href="{% url 'TCC-logout' %}">
+                <a href="#">
                   <btn type="button" class="text-black" alt="login icon">
                     <i class="bi bi-search fs-2"></i>
                   </btn>
                 </a>
-                <a href="{% url 'TCC-logout' %}">
+                <a href="{% url 'recipe-book' %}">
                   <btn type="button" alt="login icon" style="color:black">
                     <i class="bi bi-book fs-2 ms-3"></i>
                   </btn>
@@ -118,11 +118,21 @@
                   </btn>
                 </a>
                 {% else %}
-                  <a href="{% url 'TCC-login' %}">
-                    <btn type="button" class="text-black" alt="login icon">
-                      <i class="bi bi-person fs-2"></i>
-                    </btn>
-                  </a>
+                <a href="#">
+                  <btn type="button" class="text-black" alt="login icon">
+                    <i class="bi bi-search fs-2"></i>
+                  </btn>
+                </a>
+                <a href="{% url 'recipe-book' %}">
+                  <btn type="button" alt="login icon" style="color:black">
+                    <i class="bi bi-book fs-2 ms-3"></i>
+                  </btn>
+                </a>
+                <a href="{% url 'TCC-login' %}">
+                  <btn type="button" class="text-black" alt="login icon">
+                    <i class="bi bi-person fs-2 ms-3"></i>
+                  </btn>
+                </a>
                 {% endif %}
               </div>
             </div>

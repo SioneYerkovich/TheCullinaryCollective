@@ -13,6 +13,8 @@ urlpatterns = [
     path("logout/", views.logout_user, name="TCC-logout"),
     path("login/register/", views.register_view, name="TCC-register"),
     path("holidays/", views.holidays_view, name="TCC-holidays"),
+    path("recipe-book/", views.recipe_book_view, name="recipe-book"),
+    path("recipe-book/edit/<recipe_id>", views.edit_recipe_view, name="recipe-book-edit"),
 
     #This portion is all working together, as the password reset section
     path("reset-password/", auth_views.PasswordResetView.as_view(template_name="main/PWForgot.html"), name="password_reset"),
