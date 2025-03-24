@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, RecipeForm
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.decorators import login_required
 from .models import Recipe
 
 # Create your views here.
@@ -74,7 +73,7 @@ def recipe_book_view(request):
             messages.success(request,("Your recipe has been added! Well done Chef."))
             return redirect('recipe-book')
         else:
-            messages.success(request, ("Your details were incorrect"))
+            messages.error(request, ("Sacré bleu! Some of your details were incorrect. Try again."))
             return redirect('recipe-book')
     else:
         form = RecipeForm()
@@ -99,3 +98,9 @@ def edit_recipe_view(request, recipe_id):
         form = RecipeForm(instance = recipe)
 
     return render(request, 'main/EditRecipe.html', {'form': form,'recipe': recipe})
+
+def delete_recipe_view(request, recipe_id):
+    recipe = Recipe.objects.get(id = recipe_id)
+    recipe.delete()
+    messages.success(request,("The best recipes come from experimentation. Your recipe has been deleted."))
+    return redirect('recipe-book')

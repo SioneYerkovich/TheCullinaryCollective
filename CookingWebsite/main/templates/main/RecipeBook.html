@@ -168,7 +168,7 @@
           <div class="col-xs-12" style="height:100px;">
           </div>
           <div class="container text-center mt-5 animate__animated animate__fadeIn">
-            <!-- display a message when they add a new recipe -->
+            <!-- display messages when they make changes in recipe book -->
             {% if messages %}
             {% for message in messages %}
               <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -221,7 +221,7 @@
                       </a>
                           <div class="d-flex justify-content-center">
                             <a href="{% url 'recipe-book-edit' recipe.id %}"><i class="fa fa-pencil mx-4"></i><p class="mx-4">Modify</p></a>
-                            <a href="{% url 'recipe-book-edit' recipe.id %}"><span><i class="fa fa-trash mx-4"></i><p class="mx-4">Delete</p></span></a>
+                            <a href="{% url 'recipe-book-delete' recipe.id %}"><span><i class="fa fa-trash mx-4"></i><p class="mx-4">Delete</p></span></a>
                           </div>
                         </div>
                       </div>
