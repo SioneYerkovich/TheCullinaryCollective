@@ -20,12 +20,13 @@ class RegisterUserForm(UserCreationForm):
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
 class RecipeForm(forms.ModelForm):
-    Name = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={"class":"form-control mb-3"}))
-    ingredients = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}))
-    instructions = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}))
+    Name = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={"class":"form-control mb-3"}), required=True)
+    description = forms.CharField(max_length = 100, widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
+    ingredients = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
+    instructions = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
     category = forms.ModelChoiceField(queryset=Category.objects.all(), widget=forms.Select(attrs={"class":"form-select mb-3"}), required=True)
     subcategory = forms.ModelChoiceField(queryset=SubCategory.objects.all(), widget=forms.Select(attrs={"class":"form-select mb-3"}) ,required=True)
 
     class Meta:
         model = Recipe
-        fields = ['Name', 'image', 'ingredients', 'instructions', 'category', 'subcategory']
+        fields = ['Name', 'image', 'description', 'ingredients', 'instructions', 'category', 'subcategory']

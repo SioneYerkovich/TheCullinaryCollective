@@ -16,6 +16,7 @@ urlpatterns = [
     path("recipe-book/", views.recipe_book_view, name="recipe-book"),
     path("recipe-book/edit/<recipe_id>", views.edit_recipe_view, name="recipe-book-edit"),
     path("recipe-book/delete/<recipe_id>", views.delete_recipe_view, name="recipe-book-delete"),
+    path("search/", views.search_recipe_view, name="search-recipe"),
 
 
     #This portion is all working together, as the password reset section

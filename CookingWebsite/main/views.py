@@ -104,3 +104,11 @@ def delete_recipe_view(request, recipe_id):
     recipe.delete()
     messages.success(request,("The best recipes come from experimentation. Your recipe has been deleted."))
     return redirect('recipe-book')
+
+def search_recipe_view(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        results = Recipe.objects.filter(Name__contains = searched)
+        return render(request, 'main/Search.html', {'searched': searched, 'results' : results})
+    else:
+        return render(request, 'main/Search.html', {})

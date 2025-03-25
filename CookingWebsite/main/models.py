@@ -11,6 +11,7 @@ class Recipe(models.Model):
     #details of the recipe
     Name = models.CharField(max_length=100)
     image = models.ImageField()
+    description = models.TextField()
     ingredients = models.TextField()
     instructions = models.TextField()
 
