@@ -12,21 +12,50 @@ from .models import Recipe
 def home_view(request):
     return render(request, "main/home.html")
 
-#Function that will return the DailyBreakfast.html template and render it to the browser
+#Function that will return the DailyBreakfast.html template, fetch relevant recipes and render it to the browser
 def daily_recipes_breakfast_view(request):
-    return render(request, "main/DailyBreakfast.html")
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Breakfast")
+    return render(request, "main/DailyBreakfast.html", {'recipes': fetchRecipes})
 
-#Function that will return the DailyLunch.html template and render it to the browser
+#Function that will return the DailyLunch.html template, fetch relevant recipes from admin and render it to the browser
 def daily_recipes_lunch_view(request):
-    return render(request, "main/DailyLunch.html")
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Lunch")
+    return render(request, "main/DailyLunch.html", {'recipes': fetchRecipes})
 
-#Function that will return the DailyDinner.html template and render it to the browser
+#Function that will return the DailyDinner.html template, fetch relevant recipes from admin and render it to the browser
 def daily_recipes_dinner_view(request):
-    return render(request, "main/DailyDinner.html")
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Dinner")
+    return render(request, "main/DailyDinner.html", {'recipes': fetchRecipes})
 
-#Function that will return the Holidays.html template and render it to the browser
-def holidays_view(request):
-    return HttpResponse("<h1>This is the holidays page<h1>")
+#Function that will return the DailyDessert.html template, fetch relevant recipes from admin and render it to the browser
+def daily_recipes_dessert_view(request):
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Dessert")
+    return render(request, "main/DailyDessert.html", {'recipes': fetchRecipes})
+
+#Function that will return the DailyDrinks.html template, fetch relevant recipes from admin and render it to the browser
+def daily_recipes_drinks_view(request):
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Drinks")
+    return render(request, "main/DailyDrinks.html", {'recipes': fetchRecipes})
+
+#Function that will return the H&DVegetarian.html template, fetch relevant recipes from admin and render it to the browser
+def health_recipes_vegetarian_view(request):
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Vegetarian")
+    return render(request, "main/H&DVegetarian.html", {'recipes': fetchRecipes})
+
+#Function that will return the H&DKeto.html template, fetch relevant recipes from admin and render it to the browser
+def health_recipes_keto_view(request):
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Keto")
+    return render(request, "main/H&DKeto.html", {'recipes': fetchRecipes})
+
+#Function that will return the HolidaysMD.html template, fetch relevant recipes from admin and render it to the browser
+def holidays_md_view(request):
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Mothers day")
+    return render(request, "main/HolidaysMD.html", {'recipes': fetchRecipes})
+
+#Function that will return the HolidaysNY.html template, fetch relevant recipes from admin and render it to the browser
+def holidays_ny_view(request):
+    fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "The New Year")
+    return render(request, "main/HolidaysNY.html", {'recipes': fetchRecipes})
 
 #Function that will return the Login.html template and render it to the browser
 #if the user submits the form, it will validate the details and log in

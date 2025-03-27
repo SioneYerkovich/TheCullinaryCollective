@@ -21,7 +21,7 @@ class RegisterUserForm(UserCreationForm):
 
 class RecipeForm(forms.ModelForm):
     Name = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={"class":"form-control mb-3"}), required=True)
-    description = forms.CharField(max_length = 100, widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
+    description = forms.CharField(max_length = 600, widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
     ingredients = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
     instructions = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
     category = forms.ModelChoiceField(queryset=Category.objects.all(), widget=forms.Select(attrs={"class":"form-select mb-3"}), required=True)

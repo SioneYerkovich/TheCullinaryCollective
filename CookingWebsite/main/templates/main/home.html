@@ -76,8 +76,8 @@
                                 <a class="dropdown-item" href="{% url 'daily-recipes-breakfast' %}">Breakfast</a>
                                 <a class="dropdown-item" href="{% url 'daily-recipes-lunch' %}">Lunch</a>
                                 <a class="dropdown-item" href="{% url 'daily-recipes-dinner' %}">Dinner</a>
-                                <a class="dropdown-item" href="#">Dessert</a>
-                                <a class="dropdown-item" href="#">Drinks</a>
+                                <a class="dropdown-item" href="{% url 'daily-recipes-dessert' %}">Dessert</a>
+                                <a class="dropdown-item" href="{% url 'daily-recipes-drinks' %}">Drinks</a>
                             </div>
                         </li>
                         <!-- Health and diet button -->
@@ -87,8 +87,8 @@
                             </a>
                             <!-- Dropdown menu for health & diet -->
                             <div class="dropdown-menu" data-bs-popper="static">
-                                <a class="dropdown-item" href="#">Keto</a>
-                                <a class="dropdown-item" href="#">Vegetarian</a>
+                                <a class="dropdown-item" href="{% url 'health-recipes-keto' %}">Keto</a>
+                                <a class="dropdown-item" href="{% url 'health-recipes-vegetarian' %}">Vegetarian</a>
                             </div>
                         </li>
                         <!-- Holidays button -->
@@ -98,8 +98,8 @@
                             </a>
                             <!-- Dropdown menu for holidays -->
                             <div class="dropdown-menu" data-bs-popper="static">
-                                <a class="dropdown-item" href="#">Mothers Day</a>
-                                <a class="dropdown-item" href="#">The New Year</a>
+                                <a class="dropdown-item" href="{% url 'holiday-recipes-MD' %}">Mothers Day</a>
+                                <a class="dropdown-item" href="{% url 'holiday-recipes-NY' %}">The New Year</a>
                             </div>
                         </li>
                     </ul>
@@ -109,32 +109,32 @@
                             <form class="d-flex" method="POST" action="{% url 'search-recipe' %}">
                                 {% csrf_token %}
                                 <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searched" style="border-radius: 1000px">
-                                <button class="btn text-black bg-primary border-0" type="submit"><i class="bi bi-search fs-4"></i></button>
+                                <button class="btn text-black bg-primary border-0" type="submit"><i class="bi bi-search fs-4 text-dark"></i></button>
                             </form>
                             <a href="{% url 'recipe-book' %}">
-                                <btn type="button" alt="login icon" style="color:black">
-                                    <i class="bi bi-book fs-2 ms-2"></i>
+                                <btn type="button" alt="login icon">
+                                    <i class="bi bi-book fs-2 ms-2 text-dark"></i>
                                 </btn>
                             </a>
                             <a href="{% url 'TCC-logout' %}">
                                 <btn type="button" class="text-black" alt="login icon">
-                                    <i class="bi bi-door-closed fs-2 ms-3"></i>
+                                    <i class="bi bi-door-closed fs-2 ms-3 text-dark"></i>
                                 </btn>
                             </a>
                         {% else %}
                             <form class="d-flex" method="POST" action="{% url 'search-recipe' %}">
                                 {% csrf_token %}
                                 <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searched" style="border-radius: 1000px">
-                                <button class="btn text-black bg-primary border-0" type="submit"><i class="bi bi-search fs-4"></i></button>
+                                <button class="btn bg-primary border-0" type="submit"><i class="bi bi-search fs-4 text-dark"></i></button>
                             </form>
                             <a href="{% url 'recipe-book' %}">
-                                <btn type="button" alt="login icon" style="color:black">
-                                    <i class="bi bi-book fs-2 ms-2"></i>
+                                <btn type="button" alt="login icon">
+                                    <i class="bi bi-book fs-2 ms-2 text-dark"></i>
                                 </btn>
                             </a>
                             <a href="{% url 'TCC-login' %}">
-                                <btn type="button" class="text-black" alt="login icon">
-                                    <i class="bi bi-person fs-2 ms-3"></i>
+                                <btn type="button" alt="login icon">
+                                    <i class="bi bi-person fs-2 ms-3 text-dark"></i>
                                 </btn>
                             </a>
                         {% endif %}
@@ -157,7 +157,7 @@
                     <div class="col-md-6 col-sm-12 text-center pt-lg-5 pt-sm-0 pt-xs-0 mb-5">
                         <h1 class="mb-5 display-4 animate__animated animate__fadeIn">The Cullinary Collective.</h1>
                         <h3 class="animate__animated animate__fadeIn">recipes that get your taste buds <span class="text-secondary">screaming</span></h3>
-                        <button type="button" class="btn mt-3 btn-secondary animate__animated animate__fadeIn">Explore</button>
+                        <a href="{% url 'search-recipe' %}"><button type="button" class="btn mt-3 btn-secondary animate__animated animate__fadeIn">Explore</button></a>
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@
             <!-- User reviews carousel -->
             <!-- User reviews header -->
             <div class="container text-center mt-5 pt-5">
-              <h3 class="mt-sm-5">User reviews</h3>
+              <h3 class="mt-sm-5">Community reviews</h3>
               <i class="fa-solid fa-star fs-3 text-primary"></i>
               <i class="fa-solid fa-star fs-3 text-primary"></i>
               <i class="fa-solid fa-star fs-3 text-primary"></i>
@@ -183,30 +183,33 @@
                         <!-- User feedback card 1 -->
                         <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                           <div class="card">
-                            <img src="#" class="card-img-top" alt="User 1">
+                            <img src="{% static 'main/images/normal pancakes.jpg' %} " style="object-fit: cover; width: 100%; height: 400px;" class="card-img-top" alt="User 1">
                             <div class="card-body">
-                              <h5 class="card-title">Card 1</h5>
-                              <p class="card-text">This is card number 1.</p>
+                              <h5 class="card-title text-primary my-4">BUTTERMILK PANCAKES</h5>
+                              <p class="card-text">WOW. This recipe took pancakes to a whole other level! cant forget the eggs, maple syrup and butter tho.</p>
+                              <p>review by: <span class="text-secondary">AlphaChef</span></p>
                             </div>
                           </div>
                         </div>
                         <!-- User feedback card 2 -->
                         <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                           <div class="card">
-                            <img src="#" class="card-img-top" alt="User 2">
+                            <img src="{% static 'main/images/normal gyoza.jpg' %} " class="card-img-top" style="object-fit: cover; width: 100%; height: 400px;" alt="User 2">
                             <div class="card-body">
-                              <h5 class="card-title">Card 2</h5>
-                              <p class="card-text">This is card number 2.</p>
+                              <h5 class="card-title text-primary my-4">JAPANESE GYOZA</h5>
+                              <p class="card-text">I've been looking for a recipe since i got back from japan last year. This one takes me all the way back and it's crazy how authentic this is. I will definitely use this one again.</p>
+                              <p>review by: <span class="text-secondary">shecooks19</span></p>
                             </div>
                           </div>
                         </div>
                         <!-- User feedback card 3 -->
                         <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                           <div class="card">
-                            <img src="#" class="card-img-top" alt="User 3">
+                            <img src="{% static 'main/images/normal shakshuka.jpg' %}" class="card-img-top" style="object-fit: cover; width: 100%; height: 400px;" alt="User 3">
                             <div class="card-body">
-                              <h5 class="card-title">Card 3</h5>
-                              <p class="card-text">This is card number 3.</p>
+                              <h5 class="card-title text-primary my-4">SHAKSHUKA</h5>
+                              <p class="card-text">Had never heard of this before. I did have the ingredients laying around, doesn't hurt to try something new. Not my cup of tea</p>
+                              <p>review by: <span class="text-secondary">F00D</span></p>
                             </div>
                           </div>
                         </div>
@@ -219,30 +222,33 @@
                         <!-- User feedback card 4 -->
                         <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                           <div class="card">
-                            <img src="#" class="card-img-top" alt="User 4">
+                            <img src="{% static 'main/images/normal burger.jpg' %}" class="card-img-top" style="object-fit: cover; width: 100%; height: 400px;" alt="User 4">
                             <div class="card-body">
-                              <h5 class="card-title">Card 4</h5>
-                              <p class="card-text">This is card number 4.</p>
+                              <h5 class="card-title text-primary my-4">BACON CHEESEBURGER</h5>
+                              <p class="card-text">its a burger. cant go wrong</p>
+                              <p>review by: <span class="text-secondary">Did_You_Say_Bacon</span></p>
                             </div>
                           </div>
                         </div>
                         <!-- User feedback card 5 -->
                         <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                           <div class="card">
-                            <img src="#" class="card-img-top" alt="User 5">
+                            <img src="{% static 'main/images/normal spaghetti.jpeg' %}" class="card-img-top" style="object-fit: cover; width: 100%; height: 400px;" alt="User 5">
                             <div class="card-body">
-                              <h5 class="card-title">Card 5</h5>
-                              <p class="card-text">This is card number 5.</p>
+                              <h5 class="card-title text-primary my-4">SPAGHETTI BOLOGNESE</h5>
+                              <p class="card-text">My kids wont eat anything other than spaghetti most nights... this recipe was easy to follow and tasty too</p>
+                              <p>review by: <span class="text-secondary">SingleMumsClub</span></p>
                             </div>
                           </div>
                         </div>
                         <!-- User feedback card 6 -->
                         <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                           <div class="card">
-                            <img src="#" class="card-img-top" alt="User 6">
+                            <img src="{% static 'main/images/normal caesar.jpg' %}" class="card-img-top" style="object-fit: cover; width: 100%; height: 400px;" alt="User 6">
                             <div class="card-body">
-                              <h5 class="card-title">Card 6</h5>
-                              <p class="card-text">This is card number 6.</p>
+                              <h5 class="card-title text-primary my-4">CAESAR SALAD</h5>
+                              <p class="card-text">good</p>
+                              <p>review by: <span class="text-secondary">gym4life</span></p>
                             </div>
                           </div>
                         </div>
@@ -253,12 +259,12 @@
                   <!-- Carousel Controls -->
                   <!-- Left carousel button -->
                   <button class="carousel-control-prev pe-5" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
                   <!-- Right carousel button -->
                   <button class="carousel-control-next ps-5" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
                 </div>
@@ -280,42 +286,75 @@
                 </div>
               </div>
         </main>
-        <footer>
-          <!-- footer here -->
-      <div class="col-xs-12" style="height:200px;">
-      </div>
-        <!-- this is the icon content of the footer -->
-        <div class="text-center mt-5 bg-primary pt-4">
-          <!-- the TCC logo -->
-          <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
-          <!-- footer social media icons -->
-          <div class="text-center mt-4">
-            <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Instagram link icon">
-               <i class="bi bi-instagram text-white"><span class="visually-hidden">Instagram Icon</span></i>
-             </a>
-             </btn>
-            <a href="https://www.facebook.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Facebook link icon">
-               <i class="bi bi-facebook text-white"><span class="visually-hidden">Facebook Icon</span></i>
-             </a>
-             </btn>
-            <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="LinkedIn link icon">
-              <i class="bi bi-linkedin text-white"><span class="visually-hidden">LinkedIn Icon</span></i>
-            </a>
-            </btn>
-            <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-black" style="font-size: 2.5rem" alt="Github link icon">
-              <i class="bi bi-github text-white"><span class="visually-hidden">Github Icon</span></i>
-            </a>
-            </btn>
+
+        <div class="col-xs-12" style="height:100px;">
+        </div>
+        <!-- Footer section -->
+        <footer class="text-center text-lg-start text-white pt-3 mt-5 bg-primary">
+        <span class="visually-hidden text-white">Footer Section</span>
+            <div class="container-fluid text-center text-md-start mt-5">
+              <!-- Grid row -->
+              <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="text-md-center col-md-12 col-lg-6 col-xl-5  mb-4">
+                  <!-- Content -->
+                  <!-- the TCC logo -->
+                  <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
+                  <p>
+                      <a href="https://www.facebook.com" target="_blank"><btn type="button" class="text-white me-4" style="font-size: 2.5rem" aria-label="Facebook button">
+                        <i class="bi bi-facebook text-dark"><span class="visually-hidden">Facebook Icon</span></i>
+                      </a>
+                      </btn>
+                      <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-white me-4" style="font-size: 2.5rem" aria-label="Instagram button">
+                        <i class="bi bi-instagram text-dark"><span class="visually-hidden">Instagram Icon</span></i>
+                      </a>
+                      </btn>
+                      <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-white me-4" style="font-size: 2.5rem" aria-label="LinkedIn button">
+                        <i class="bi bi-linkedin text-dark"><span class="visually-hidden">Linkedin Icon</span></i>
+                      </a>
+                      </btn>
+                      <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-white mb-5" style="font-size: 2.5rem" aria-label="Github button">
+                        <i class="bi bi-github text-dark"><span class="visually-hidden">Github Icon</span></i>
+                      </a>
+                      </btn>
+                  </p>
+                </div>
+        
+                <!-- horizontal spacer -->
+                <div class="col-md-12 col-lg-1 col-xl-3 mx-auto mb-4">
+                </div>
+        
+                <!-- Address section -->
+                <div class="text-md-center text-lg-start col-md-12 col-lg-1 col-xl-2 mx-auto mb-4 mt-3">
+                  <h4 class="text-uppercase fw-bold text-white">Github</h4>
+                  <hr
+                      class="mb-4 mt-0 d-inline-block mx-auto"
+                      style="width: 60px; background-color: #ffffff; height: 2px"
+                      />
+                  <p><i class="fa fa-user-gear"></i> SioneYerkovich</p>
+                </div>
+        
+                <!-- Contact section -->
+                <div class="text-md-center text-lg-start col-md-12 col-lg-2 col-xl-2 mx-auto mb-4 mt-3">
+                  <h4 class="text-uppercase fw-bold text-white">Contact</h4>
+                  <hr
+                      class="mb-4 mt-0 d-inline-block mx-auto"
+                      style="width: 60px; background-color: #ffffff; height: 2px"
+                      />
+                  <p><i class="fa fa-house"></i> 26 Fake Address <br>Auckland city, 1001</p>
+                  <p><i class="fa-regular fa-paper-plane"></i> sioney@gmail.com</p>
+                  <p><i class="fa fa-phone"></i> +6421 716 202</p>
+        
+                </div>
+              </div>
+            </div>
+        
+          <!-- Copyright -->
+          <div class="text-center p-3 bg-primary">
+            © 2025 Copyright:
+            <a class="text-white" href="index.html">The Cullinary Collective</a>
           </div>
-        </div>
-        <!-- descriptions below the icons -->
-        <div class="text-center p-3 bg-primary text-white pt-5">
-           <div class="mb-2">
-               Find me on github: SioneYerkovich
-           </div>
-          © 2025 Copyright: Sione Yerkovich. All rights Reserved.
-        </div>
-      </footer>
+        </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script 
             src="https://kit.fontawesome.com/0ca402662e.js" 

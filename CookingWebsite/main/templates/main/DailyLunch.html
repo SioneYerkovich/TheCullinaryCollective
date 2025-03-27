@@ -57,7 +57,7 @@
     </head>
 
     <body>
-          <header class="bg-primary">
+        <header class="bg-primary">
             <!-- Navbar here (COMPLETED) -->
             <nav class="navbar navbar-expand-xxl" data-bs-theme="dark">
                 <div class="container-fluid">
@@ -88,8 +88,8 @@
                                     <a class="dropdown-item" href="{% url 'daily-recipes-breakfast' %}">Breakfast</a>
                                     <a class="dropdown-item" href="{% url 'daily-recipes-lunch' %}">Lunch</a>
                                     <a class="dropdown-item" href="{% url 'daily-recipes-dinner' %}">Dinner</a>
-                                    <a class="dropdown-item" href="#">Dessert</a>
-                                    <a class="dropdown-item" href="#">Drinks</a>
+                                    <a class="dropdown-item" href="{% url 'daily-recipes-dessert' %}">Dessert</a>
+                                    <a class="dropdown-item" href="{% url 'daily-recipes-drinks' %}">Drinks</a>
                                 </div>
                             </li>
                             <!-- Health and diet button -->
@@ -99,8 +99,8 @@
                                 </a>
                                 <!-- Dropdown menu for health & diet -->
                                 <div class="dropdown-menu" data-bs-popper="static">
-                                    <a class="dropdown-item" href="#">Keto</a>
-                                    <a class="dropdown-item" href="#">Vegetarian</a>
+                                    <a class="dropdown-item" href="{% url 'health-recipes-keto' %}">Keto</a>
+                                    <a class="dropdown-item" href="{% url 'health-recipes-vegetarian' %}">Vegetarian</a>
                                 </div>
                             </li>
                             <!-- Holidays button -->
@@ -110,8 +110,8 @@
                                 </a>
                                 <!-- Dropdown menu for holidays -->
                                 <div class="dropdown-menu" data-bs-popper="static">
-                                    <a class="dropdown-item" href="#">Mothers Day</a>
-                                    <a class="dropdown-item" href="#">The New Year</a>
+                                    <a class="dropdown-item" href="{% url 'holiday-recipes-MD' %}">Mothers Day</a>
+                                    <a class="dropdown-item" href="{% url 'holiday-recipes-NY' %}">The New Year</a>
                                 </div>
                             </li>
                         </ul>
@@ -121,32 +121,32 @@
                                 <form class="d-flex" method="POST" action="{% url 'search-recipe' %}">
                                     {% csrf_token %}
                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searched" style="border-radius: 1000px">
-                                    <button class="btn text-black bg-primary border-0" type="submit"><i class="bi bi-search fs-4"></i></button>
+                                    <button class="btn text-black bg-primary border-0" type="submit"><i class="bi bi-search fs-4 text-dark"></i></button>
                                 </form>
                                 <a href="{% url 'recipe-book' %}">
-                                    <btn type="button" alt="login icon" style="color:black">
-                                        <i class="bi bi-book fs-2 ms-2"></i>
+                                    <btn type="button" alt="login icon">
+                                        <i class="bi bi-book fs-2 ms-2 text-dark"></i>
                                     </btn>
                                 </a>
                                 <a href="{% url 'TCC-logout' %}">
                                     <btn type="button" class="text-black" alt="login icon">
-                                        <i class="bi bi-door-closed fs-2 ms-3"></i>
+                                        <i class="bi bi-door-closed fs-2 ms-3 text-dark"></i>
                                     </btn>
                                 </a>
                             {% else %}
                                 <form class="d-flex" method="POST" action="{% url 'search-recipe' %}">
                                     {% csrf_token %}
                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searched" style="border-radius: 1000px">
-                                    <button class="btn text-black bg-primary border-0" type="submit"><i class="bi bi-search fs-4"></i></button>
+                                    <button class="btn bg-primary border-0" type="submit"><i class="bi bi-search fs-4 text-dark"></i></button>
                                 </form>
                                 <a href="{% url 'recipe-book' %}">
-                                    <btn type="button" alt="login icon" style="color:black">
-                                        <i class="bi bi-book fs-2 ms-2"></i>
+                                    <btn type="button" alt="login icon">
+                                        <i class="bi bi-book fs-2 ms-2 text-dark"></i>
                                     </btn>
                                 </a>
                                 <a href="{% url 'TCC-login' %}">
-                                    <btn type="button" class="text-black" alt="login icon">
-                                        <i class="bi bi-person fs-2 ms-3"></i>
+                                    <btn type="button" alt="login icon">
+                                        <i class="bi bi-person fs-2 ms-3 text-dark"></i>
                                     </btn>
                                 </a>
                             {% endif %}
@@ -172,80 +172,154 @@
             <!-- recipe section -->
             <div class="container">
                 <div class="row">
-                    <!-- recipe card 1-->
+                    <!-- user recipe card generator -->
+                    <!-- search for admin account, for each recipe do this -->
+                    {% for recipe in recipes %}
                     <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
                         <div class="card border-0">
-                            <a href="#"><img src="{% static 'main/images/caesar.jpg' %}" class="zoom card-img-top img-fluid animate__animated animate__fadeIn" alt="Recipe 1"></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ recipe.id }}"><img src="{{ recipe.image.url }}" class="zoom card-img-top img-fluid animate__animated animate__fadeIn" alt="{{ recipe.Name }}"></a>
                             <div class="card-body">
-                                <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">CAESAR SALAD</h5></a>
-                                <p class="card-text text-center">"Most people buy Caesar salad dressing in a bottle, homemade is incredibly easy to make and tastes so much better than store-bought.
-                                     There are many variations, but this rich and creamy version is the one my whole family loves."</p>
-                                <p class="text-center text-secondary">- <span class="text-secondary">Jennifer Segal</span></p>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ recipe.id }}"><h5 class="dailyrecipe card-title text-dark text-center my-4">{{ recipe.Name }}</h5></a>
+                                <p class="card-text text-center">"{{ recipe.description }}"
+                                </p>
+                                <p class="text-center text-secondary">- <span class="text-secondary">{{ recipe.author }}</span></p>
                             </div>
                         </div>
                     </div>
-                    <!-- recipe card 2 -->
-                    <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
-                        <div class="card border-0">
-                        <a href="#"><img src="{% static 'main/images/gyoza.jpg' %}" class="zoom card-img-top animate__animated animate__fadeIn" alt="Recipe 2"></a>
-                        <div class="card-body">
-                            <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">JAPANESE GYOZA</h5></a>
-                            <p class="card-text text-center">"This Japanese Gyoza recipe is my mothers’, and it’s a traditional, authentic recipe. 
-                                Juicy on the inside, a golden brown and crispy base, these are made in a skillet and are one of my all time favourite Japanese dishes!"</p>
-                            <p class="text-center text-secondary">- <span class="text-secondary">Nagi</span></p>
+                    {% endfor %}
+
+
+                    
+                    <!-- Modals for existing user recipes -->
+                    <!-- if recipes exist, for each recipe do this -->
+                        {% for recipe in recipes %}
+                        <!-- Existing recipe modal for logged in user -->
+                        <div class="modal fade" id="recipeModal{{ recipe.id }}" tabindex="-1" role="dialog" aria-labelledby="recipeModal{{ recipe.id }}Label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="recipeModal{{ recipe.id }}Label">{{ recipe.Name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <!-- modal body content (everything after the title) -->
+                                <div class="modal-body">
+                                <div class="container mb-3">
+                                    <div class="row">
+                                    <img class="col-md-4" src="{{ recipe.image.url }}">
+                                    <div class="col-md-8">
+                                        <h5 class="mb-3">Recipe by: <span class="text-secondary">{{ recipe.author }}</span></h5>
+                                        <p>{{ recipe.description }}</p>
+                                        <p></p>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!-- Accordion inside modal -->
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <!-- Ingredients panel -->
+                                    <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        Ingredients
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                        {{ recipe.ingredients|linebreaks }}
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <!-- Cooking instructions panel -->
+                                    <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                        Cooking Instructions
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                        <div class="accordion-body">
+                                        {{ recipe.instructions|linebreaks }}
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
-                    <!-- recipe card 3 -->
-                    <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
-                        <div class="card border-0">
-                        <a href="#"><img src="{% static 'main/images/margherita.jpg' %}" class="zoom card-img-top animate__animated animate__fadeIn" alt="Recipe 3"></a>
-                        <div class="card-body">
-                            <a href="#"><h5 class="dailyrecipe card-title text-dark text-center my-4">MARGHERITA PIZZA</h5></a>
-                            <p class="card-text text-center">"Margherita is the original pizza flavour, with just three toppings – tomato, basil and mozzarella; a simple, but sublime combination!"</p>
-                            <p class="text-center text-secondary">- <span class="text-secondary">Nadia Lim</span></p>
-                        </div>
-                        </div>
-                    </div>
+                        {% endfor %}
                 </div>
             </div>
         </main>
-        <footer>
-          <!-- footer here -->
-      <div class="col-xs-12" style="height:200px;">
-      </div>
-        <!-- this is the icon content of the footer -->
-        <div class="text-center mt-5 bg-primary pt-4">
-          <!-- the TCC logo -->
-          <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
-          <!-- footer social media icons -->
-          <div class="text-center mt-4">
-            <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Instagram link icon">
-               <i class="bi bi-instagram text-white"><span class="visually-hidden">Instagram Icon</span></i>
-             </a>
-             </btn>
-            <a href="https://www.facebook.com/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="Facebook link icon">
-               <i class="bi bi-facebook text-white"><span class="visually-hidden">Facebook Icon</span></i>
-             </a>
-             </btn>
-            <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-black me-4" style="font-size: 2.5rem" alt="LinkedIn link icon">
-              <i class="bi bi-linkedin text-white"><span class="visually-hidden">LinkedIn Icon</span></i>
-            </a>
-            </btn>
-            <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-black" style="font-size: 2.5rem" alt="Github link icon">
-              <i class="bi bi-github text-white"><span class="visually-hidden">Github Icon</span></i>
-            </a>
-            </btn>
-          </div>
+
+        <div class="col-xs-12" style="height:100px;">
         </div>
-        <!-- descriptions below the icons -->
-        <div class="text-center p-3 bg-primary text-white pt-5">
-           <div class="mb-2">
-               Find me on github: SioneYerkovich
-           </div>
-          © 2025 Copyright: Sione Yerkovich. All rights Reserved.
-        </div>
-      </footer>
+        <!-- Footer section -->
+        <footer class="text-center text-lg-start text-white pt-3 mt-5 bg-primary">
+            <span class="visually-hidden text-white">Footer Section</span>
+                <div class="container-fluid text-center text-md-start mt-5">
+                  <!-- Grid row -->
+                  <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="text-md-center col-md-12 col-lg-6 col-xl-5  mb-4">
+                      <!-- Content -->
+                      <!-- the TCC logo -->
+                      <img src="{% static 'main/images/TCC logo.PNG' %}" class="img-fluid" width="300" alt="TCC logo">
+                      <p>
+                          <a href="https://www.facebook.com" target="_blank"><btn type="button" class="text-white me-4" style="font-size: 2.5rem" aria-label="Facebook button">
+                            <i class="bi bi-facebook text-dark"><span class="visually-hidden">Facebook Icon</span></i>
+                          </a>
+                          </btn>
+                          <a href="https://www.instagram.com/" target="_blank"><btn type="button" class="text-white me-4" style="font-size: 2.5rem" aria-label="Instagram button">
+                            <i class="bi bi-instagram text-dark"><span class="visually-hidden">Instagram Icon</span></i>
+                          </a>
+                          </btn>
+                          <a href="https://www.linkedin.com/in/sione-yerkovich-38ba67341/" target="_blank"><btn type="button" class="text-white me-4" style="font-size: 2.5rem" aria-label="LinkedIn button">
+                            <i class="bi bi-linkedin text-dark"><span class="visually-hidden">Linkedin Icon</span></i>
+                          </a>
+                          </btn>
+                          <a href="https://github.com/SioneYerkovich" target="_blank"><btn type="button" class="text-white mb-5" style="font-size: 2.5rem" aria-label="Github button">
+                            <i class="bi bi-github text-dark"><span class="visually-hidden">Github Icon</span></i>
+                          </a>
+                          </btn>
+                      </p>
+                    </div>
+            
+                    <!-- horizontal spacer -->
+                    <div class="col-md-12 col-lg-1 col-xl-3 mx-auto mb-4">
+                    </div>
+            
+                    <!-- Address section -->
+                    <div class="text-md-center text-lg-start col-md-12 col-lg-1 col-xl-2 mx-auto mb-4 mt-3">
+                      <h4 class="text-uppercase fw-bold text-white">Github</h4>
+                      <hr
+                          class="mb-4 mt-0 d-inline-block mx-auto"
+                          style="width: 60px; background-color: #ffffff; height: 2px"
+                          />
+                      <p><i class="fa fa-user-gear"></i> SioneYerkovich</p>
+                    </div>
+            
+                    <!-- Contact section -->
+                    <div class="text-md-center text-lg-start col-md-12 col-lg-2 col-xl-2 mx-auto mb-4 mt-3">
+                      <h4 class="text-uppercase fw-bold text-white">Contact</h4>
+                      <hr
+                          class="mb-4 mt-0 d-inline-block mx-auto"
+                          style="width: 60px; background-color: #ffffff; height: 2px"
+                          />
+                      <p><i class="fa fa-house"></i> 26 Fake Address <br>Auckland city, 1001</p>
+                      <p><i class="fa-regular fa-paper-plane"></i> sioney@gmail.com</p>
+                      <p><i class="fa fa-phone"></i> +6421 716 202</p>
+            
+                    </div>
+                  </div>
+                </div>
+            
+              <!-- Copyright -->
+              <div class="text-center p-3 bg-primary">
+                © 2025 Copyright:
+                <a class="text-white" href="index.html">The Cullinary Collective</a>
+              </div>
+        </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script 
         src="https://kit.fontawesome.com/0ca402662e.js" 
