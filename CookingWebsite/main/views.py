@@ -68,7 +68,7 @@ def login_view(request):
             login(request, user)
             return redirect('TCC-home')
         else:
-            messages.success(request, ("Your details were incorrect or no such account exists."))
+            messages.error(request, ("Your details were incorrect or no such account exists."))
             return redirect('TCC-login')
     else:
         return render(request, "main/Login.html")
