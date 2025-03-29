@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -137,7 +138,7 @@ def delete_recipe_view(request, recipe_id):
 def search_recipe_view(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        results = Recipe.objects.filter(Name__contains = searched)
+        results = Recipe.objects.filter(Q(Name__contains = searched) | Q(subcategory__type__contains = searched))
         return render(request, 'main/Search.html', {'searched': searched, 'results' : results})
     else:
         return render(request, 'main/Search.html', {})

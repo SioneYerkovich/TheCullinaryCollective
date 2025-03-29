@@ -161,84 +161,87 @@
             </div>
 
             <div class="container">
-                {% if searched %}
-                <h1 class="display-4 text-md-start text-center">Search the collective!</h1>
-                <h3 class="mb-5 text-md-start text-center">Showing search results for: <span class="text-secondary">{{ searched }}</span></h3>
-                <h1 class="fst-italic lead text-md-start text-center">Check out these delicious cullinary crafts.</h1>
+                <div class="row">
+                    {% if searched %}
+                    <h1 class="display-4 text-md-start text-center">Search the collective!</h1>
+                    <h3 class="mb-5 text-md-start text-center">Showing search results for: <span class="text-secondary">{{ searched }}</span></h3>
+                    <h1 class="fst-italic lead text-md-start text-center">Check out these delicious cullinary crafts.</h1>
 
-                {% for result in results %}
-                <!-- recipe card 1-->
-                <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0 mt-5">
-                    <div class="card border-0">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ result.id }}"><img src="{{ result.image.url }}" class="zoom card-img-top img-fluid animate__animated animate__fadeIn" alt="Recipe {{ result.Name }}"></a>
-                        <div class="card-body">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ result.id }}"><h5 class="recipe card-title text-dark text-center my-4">{{ result.Name }}</h5></a>
-                            <p class="card-text text-center">"{{ result.description }}"
-                            </p>
-                            <p class="text-center text-secondary">- <span class="text-secondary">{{ result.user }}</span></p>
+
+                    {% for result in results %}
+                    <!-- recipe card 1-->
+                    <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0 mt-5">
+                        <div class="card border-0">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ result.id }}"><img src="{{ result.image.url }}" class="zoom card-img-top img-fluid animate__animated animate__fadeIn" alt="Recipe {{ result.Name }}"></a>
+                            <div class="card-body">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ result.id }}"><h5 class="recipe card-title text-dark text-center my-4">{{ result.Name }}</h5></a>
+                                <p class="card-text text-center">"{{ result.description }}"
+                                </p>
+                                <p class="text-center text-secondary">- <span class="text-secondary">{{ result.user }}</span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
 
-                {% else %}
-                    <h1 class="display-4 text-md-start text-center">Sacré bleu!</h1>
-                    <h3 class="mb-5 text-md-start text-center">Did you work overtime today Chef?</h3>
-                    <h1 class="fst-italic lead text-md-start text-center">You searched for <span class="text-secondary">nothing.</span> Try typing in the search bar.</h1>
-                    <div class="d-flex justify-content-center">
-                        <img class="w-50 mt-5 pt-5 col-12" src ="{% static 'main/images/search.svg' %}">
-                    </div>
-                {% endif %}
+                    {% else %}
+                        <h1 class="display-4 text-md-start text-center">Sacré bleu!</h1>
+                        <h3 class="mb-5 text-md-start text-center">Did you work overtime today Chef?</h3>
+                        <h1 class="fst-italic lead text-md-start text-center">You searched for <span class="text-secondary">nothing.</span> Try typing in the search bar.</h1>
+                        <div class="d-flex justify-content-center">
+                            <img class="w-50 mt-5 pt-5 col-12" src ="{% static 'main/images/search.svg' %}">
+                        </div>
+                    {% endif %}
 
-                <!-- Modals for existing user recipes -->
-                <!-- if recipe exist, for each recipe do this -->
-                {% if searched %}
-                    {% for result in results %}
-                        <!-- Existing recipe modal for logged in user -->
-                        <div class="modal fade" id="recipeModal{{ result.id }}" tabindex="-1" role="dialog" aria-labelledby="recipeModal{{ result.id }}Label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="recipeModal{{ result.id }}Label">{{ result.Name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <!-- modal body content (everything after the title) -->
-                                    <div class="modal-body">
-                                        <div class="container mb-3">
-                                            <div class="row">
-                                                <img class="col-md-4" src="{{ result.image.url }}">
-                                                <div class="col-md-8">
-                                                    <h5 class="mb-3">Recipe by: <span class="text-secondary">{{ result.user }}</span></h5>
-                                                    <p> {{ result.description }} </p>
-                                                </div>
-                                            </div>
+                    <!-- Modals for existing user recipes -->
+                    <!-- if recipe exist, for each recipe do this -->
+                    {% if searched %}
+                        {% for result in results %}
+                            <!-- Existing recipe modal for logged in user -->
+                            <div class="modal fade" id="recipeModal{{ result.id }}" tabindex="-1" role="dialog" aria-labelledby="recipeModal{{ result.id }}Label" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="recipeModal{{ result.id }}Label">{{ result.Name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-
-                                        <!-- Accordion inside modal -->
-                                        <div class="accordion" id="accordionPanelsStayOpenExample">
-                                            <!-- Ingredients panel -->
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header">
-                                                    <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                                        Ingredients
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                                    <div class="accordion-body">
-                                                        {{ result.ingredients }}
+                                        <!-- modal body content (everything after the title) -->
+                                        <div class="modal-body">
+                                            <div class="container mb-3">
+                                                <div class="row">
+                                                    <img class="col-md-4" src="{{ result.image.url }}">
+                                                    <div class="col-md-8">
+                                                        <h5 class="mb-3">Recipe by: <span class="text-secondary">{{ result.user }}</span></h5>
+                                                        <p> {{ result.description }} </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Cooking instructions panel -->
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header">
-                                                    <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                                        Cooking Instructions
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                                                    <div class="accordion-body">
-                                                        {{ result.instructions }}
+
+                                            <!-- Accordion inside modal -->
+                                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                                <!-- Ingredients panel -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                                            Ingredients
+                                                        </button>
+                                                    </h2>
+                                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                                        <div class="accordion-body">
+                                                            {{ result.ingredients }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Cooking instructions panel -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                                            Cooking Instructions
+                                                        </button>
+                                                    </h2>
+                                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                                        <div class="accordion-body">
+                                                            {{ result.instructions }}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,10 +249,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </main>
         <div class="col-xs-12" style="height:100px;">
