@@ -15,6 +15,7 @@ class Recipe(models.Model):
     description = models.TextField(max_length=600)
     ingredients = models.TextField()
     instructions = models.TextField()
+    likes = models.ManyToManyField(User, related_name='likes')
 
     #connections to the category hierarchy
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL)
@@ -37,3 +38,22 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.type
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='reviews') 
+    content = models.TextField(max_length=200) 
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'recipe')
+
+    def __str__(self):
+        return f"Review by {self.user.username} for {self.recipe.Name}"
+    
+class Favourite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourites')
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='favourited_by')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.recipe.Name}"

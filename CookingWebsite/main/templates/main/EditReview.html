@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>TCC - Daily Recipes (Lunch)</title>
+        <title>TCC - Login</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -33,41 +33,32 @@
             .navHeader:hover {
             text-decoration: underline;
             text-decoration-color: white;
-            }
-            /* Underlining the daily recipe headers on hover */
-            .dailyrecipe:hover {
-            text-decoration: underline;
-            text-decoration-color: #f4a5a8;
-            }
+            }            
+            
             /* Changing anchortags to no longer have an underline by default, only on hover */
             a {
             text-decoration: none;
             }
-            /* The zoom animation */
-            .zoom {
-            transition: transform .2s;
-            }
-            /* zoom strength and opacity */
-            .zoom:hover {
-            transform: scale(1.05);
-            opacity: 0.9!important;
-            filter: brightness(0.6) !important;
-            }
+            /*change nav icon color on hover*/
             .bi:hover {
             color: white !important;
             }
-            .change:hover {
-            color: #f4a5a8;
+
+            /* Underlining the recipe book headers on hover */
+            .UserRecipeHeader:hover {
+            text-decoration: underline;
+            text-decoration-color: #f4a5a8;
             }
-            /* Initially hide the button */
-            .hidden-button {
-                opacity: 0;
-                transition: opacity 0.3s ease;
+
+            /* Changing anchortags to no longer have an underline by default, only on hover */
+            .redirect {
+            text-decoration: none;
             }
-            /* Make the button appear when hovering over the container */
-            .container:hover .hidden-button {
-                opacity: 1;
+            .redirect:hover {
+            text-decoration: underline;
+            text-decoration-color: #78C2AD;
             }
+
         </style>
     </head>
 
@@ -170,185 +161,24 @@
                 </div>
             </nav>
         </header>
-        
-        <!-- Main body content of recipe page -->
+
+        <!-- main body content for the edit page  -->
         <main>
-            <div class="col-xs-12" style="height:50px;">
-            </div>
-            <!-- Hero section -->
-             <div class="container my-5">
-                <h1 class="display-4 animate__animated animate__fadeIn text-md-start text-center">The Cullinary Collective.</h1>
-                <h3 class="animate__animated animate__fadeIn mb-5 text-md-start text-center">Daily recipe ideas: <span class="text-secondary">Lunch recipes</span></h3>
-                <h1 class="fst-italic lead animate__animated animate__fadeIn text-md-start text-center">Lunch: The most important meal of the day... until dinner, that is.</h1>
-             </div>
-
-             <div class="col-xs-12" style="height:100px;">
-            </div>
-            <!-- this is the alert message for success and error messages -->
-            {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == 'error' %}
-                <div class="container">
-                    <div class="offset-2 col-8 alert alert-danger alert-dismissible fade show text-center" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <div class="col-xs-12" style="height:200px;">
+          </div>
+            <!-- Form to edit the recipe -->
+            <div class="container d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn">
+                <h5 class="display-4 mb-5">Edit a review</h5>
+                <form method="POST" action="{% url 'edit-review-breakfast' recipe_id=recipe.id review_id=review.id %}" class="col-md-6 col-lg-6 col-sm-8">
+                    {% csrf_token %}
+                    <textarea class="form-control" name="content" rows="4" cols="50">{{ review.content }}</textarea>
+                    <!-- this is the submit button & link back to home -->
+                    <div class="d-flex justify-content-center flex-column align-items-center">
+                      <button type="submit" class="btn btn-secondary mt-5 col-md-12 col-lg-12 col-sm-12" style="border-radius: 1000px">Submit review</button>
+                      <a href="{% url 'TCC-home' %}" class="redirect"><p class="ms-1 mt-1 text-primary"><small>Back to home</small></p></a>
                     </div>
-                </div>
-                {% elif message.tags == 'success' %}
-                <div class="container">
-                    <div class="offset-2 col-8 alert alert-success alert-dismissible fade show text-center" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-                {% endif %}
-            {% endfor %}
-            {% endif %}
-            <!-- recipe section -->
-            <div class="container">
-                <div class="row">
-                    <!-- user recipe card generator -->
-                    <!-- search for admin account, for each recipe do this -->
-                    {% for recipe in recipes %}
-                    <div class="col-md-4 col-sm-8 offset-sm-2 offset-md-0">
-                        <div class="card border-0">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ recipe.id }}"><img src="{{ recipe.image.url }}" class="zoom card-img-top img-fluid animate__animated animate__fadeIn" alt="{{ recipe.Name }}"></a>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-center hidden-button">
-                                    <form action="{% url 'like-recipe-lunch' recipe.id %}" method="POST">
-                                        {% csrf_token %}
-                                            {% if request.user in recipe.likes.all %}
-                                            <div class="col-6 mt-2">
-                                                <button class="border-0 bg-white text-primary p-0" type="submit" name="recipe_id" value="{{ recipe.id }}">
-                                                    <i class="fa-solid fa-heart mx-4 fs-4 change"></i>
-                                                    <p>Unlike</p>
-                                                </button>
-                                            </div>
-                                            {% else %}
-                                            <div class="col-6 mt-2">
-                                                <button class="border-0 bg-white text-primary p-0" type="submit" name="recipe_id" value="{{ recipe.id }}">
-                                                    <i class="fa-regular fa-heart mx-4 fs-4 change"></i>
-                                                    <p>Like</p>
-                                                </button>
-                                            </div>
-                                            {% endif %}
-                                    </form>
-                                    <form action="{% url 'add-favourite-lunch' recipe.id %}" method="POST">
-                                        {% csrf_token %}
-                                            <div class="col-6 mt-2">
-                                                <button class="border-0 bg-white text-primary p-0" type="submit" name="recipe_id" value="{{ recipe.id }}">
-                                                    <i class="fa-regular fa-bookmark mx-4 fs-4 change"></i>
-                                                    <p>Favourite</p>
-                                                </button>
-                                            </div>
-                                    </form>
-                                    <a href="{% url 'add-review-lunch' recipe.id %}">
-                                        {% csrf_token %}
-                                            <div class="col-6 mt-2">
-                                                <button class="border-0 bg-white text-primary p-0" type="submit" name="recipe_id" value="{{ recipe.id }}">
-                                                    <i class="fa-regular fa-star mx-4 fs-4 change"></i>
-                                                    <p>Review</p>
-                                                </button>
-                                            </div>
-                                    </a>
-                                </div>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#recipeModal{{ recipe.id }}"><h5 class="dailyrecipe card-title text-dark text-center my-4">{{ recipe.Name }}</h5></a>
-                                <p class="card-text text-center">"{{ recipe.description }}"
-                                </p>
-                                <p class="text-center text-secondary">- <span class="text-secondary">{{ recipe.author }}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-
-                    
-                    <!-- Modals for existing user recipes -->
-                    <!-- if recipes exist, for each recipe do this -->
-                        {% for recipe in recipes %}
-                        <!-- Existing recipe modal for logged in user -->
-                        <div class="modal fade" id="recipeModal{{ recipe.id }}" tabindex="-1" role="dialog" aria-labelledby="recipeModal{{ recipe.id }}Label" aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="recipeModal{{ recipe.id }}Label">{{ recipe.Name }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <!-- modal body content (everything after the title) -->
-                                <div class="modal-body">
-                                <div class="container mb-3">
-                                    <div class="row">
-                                    <img class="col-md-4" src="{{ recipe.image.url }}">
-                                    <div class="col-md-8">
-                                        <h5 class="mb-3">Recipe by: <span class="text-secondary">{{ recipe.author }}</span></h5>
-                                        <p>{{ recipe.description }}</p>
-                                        <p><i class="fa-solid fa-heart text-secondary"></i> Likes: {{ recipe.likes.count }}</p>
-                                    </div>
-                                    </div>
-                                </div>
-
-                                <!-- Accordion inside modal -->
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <!-- Ingredients panel -->
-                                    <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                        Ingredients
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                        <div class="accordion-body">
-                                        {{ recipe.ingredients|linebreaks }}
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <!-- Cooking instructions panel -->
-                                    <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                        Cooking Instructions
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                                        <div class="accordion-body">
-                                        {{ recipe.instructions|linebreaks }}
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <h5 class="mb-3 mt-5">Reviews:</h5>
-                                <!-- Reviews section -->
-                                {% if reviews %}
-                                    {% for review in reviews %}
-                                        {% if review.recipe.id == recipe.id %}
-                                            <div class="col-12">
-                                                <div class="card border-primary">
-                                                    <div class="card-body">
-                                                        <p class="card-text">{{ review.content }}</p>
-                                                        <p>Review by: <span class="text-secondary">{{ review.user }}</span></p>
-                                                        <p>{{ review.timestamp }}</p>
-                                                        {% if recipe in liked_recipes %}
-                                                            <p class="text-primary"><i class="fa-solid fa-heart"></i> {{ review.user }} has liked this recipe!</p>
-                                                        {% else %}
-                                                            <p class="text-secondary"><i class="fa-regular fa-heart"></i> {{ review.user }} hasn't liked this recipe yet</p>
-                                                        {% endif %}
-                                                        {% if review.user == request.user %}
-                                                        <a href="{% url 'edit-review-lunch' recipe_id=recipe.id review_id=review.id %}">Edit Review</a>
-                                                        <a class="ms-4" href="{% url 'delete-review-lunch' recipe_id=recipe.id review_id=review.id %}">Delete Review</a>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                </div>
-            </div>
+                  </form>
+              </div>
         </main>
 
         <div class="col-xs-12" style="height:100px;">

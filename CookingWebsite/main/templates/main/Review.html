@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>TCC - Login</title>
+        <title>TCC - Register</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -27,14 +27,15 @@
         <!-- Animate css stylesheet -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
-            <!-- custom css styling -->
+
+        <!-- custom css styling -->
         <style>
             /* navbar header underlining on hover */
             .navHeader:hover {
             text-decoration: underline;
             text-decoration-color: white;
             }
-            /* Changing anchortags to no longer have an underline by default, only on hover */
+            /* Changing redirect to no longer have an underline by default, only on hover */
             .redirect {
             text-decoration: none;
             }
@@ -45,6 +46,7 @@
             .bi:hover {
             color: white !important;
             }
+
         </style>
     </head>
 
@@ -148,50 +150,30 @@
             </nav>
         </header>
 
-        <!-- main body content for the login page  -->
-        <main>
-          <div class="col-xs-12" style="height:200px;">
-          </div>
-
-          <div class="container d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn">
-          <!-- this is the alert message for a successful user registration. it is being redirected from views.py -->
-              {% if messages %}
-                {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {% elif message.tags == 'success' %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {% endif %}
-                {% endfor %}
-              {% endif %}
-              <h5 class="display-4 mb-5">Login</h5>
-              <form method="POST" action="{% url 'TCC-login' %}" class="col-md-6 col-lg-4 col-sm-8">
-                {% csrf_token %}
-                <div class="form-floating mb-3">
-                  <input type="text" id="floatingusername" placeholder="Username" class="form-control" aria-describedby="username" name="username" required>
-                  <label for="floatingusername">Username</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="password" id="floatingpw" placeholder="Password" class="form-control" aria-describedby="password" name="password" required>
-                  <label for="floatingpw">Password</label>
-                  <a href="{% url 'password_reset' %}" class="register redirect"><p class="ms-1 mt-1 text-primary"><small>Forgot password?</small></p></a>
-                </div>
-                <div class="d-flex justify-content-center flex-column align-items-center">
-                  <button type="submit" class="btn btn-secondary mt-5 col-md-12 col-lg-12 col-sm-12" style="border-radius: 1000px">Log in</button>
-                  <a href="{% url 'TCC-register' %}" class="redirect"><p class="ms-1 mt-1 text-primary"><small>Register an account</small></p></a>
-                </div>
-              </form>
-          </div>
-        </main>
-        <div class="col-xs-12" style="height:100px;">
+      <!-- This is the main section of the Registration page-->
+      <main>
+        <div class="col-xs-12" style="height:200px;">
         </div>
-        
+        <!-- review form -->
+        <!-- these are the input fields -->
+        <div class="container d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn">
+          <h5 class="display-4 mb-5">Make a review</h5>
+          <form method="POST" action="{% url 'add-review-breakfast' recipe.id %}" class="col-md-6 col-lg-6 col-sm-8">
+            {% csrf_token %}
+            {{ form }}
+            <!--<textarea class="form-control" name="content" rows="4" cols="50"></textarea>-->
+            <!-- this is the submit button & link back to home -->
+            <div class="d-flex justify-content-center flex-column align-items-center">
+              <button type="submit" class="btn btn-secondary mt-5 col-md-12 col-lg-12 col-sm-12" style="border-radius: 1000px">Submit review</button>
+              <a href="{% url 'TCC-home' %}" class="redirect"><p class="ms-1 mt-1 text-primary"><small>Back to home</small></p></a>
+            </div>
+          </form>
+        </div>
+      </main>
+      
+      <div class="col-xs-12" style="height:100px;">
+    </div>
+
         <!-- Footer section -->
         <footer class="text-center text-lg-start text-white pt-3 mt-5 bg-primary">
             <span class="visually-hidden text-white">Footer Section</span>
@@ -258,22 +240,22 @@
                 <a class="text-white" href="index.html">The Cullinary Collective</a>
               </div>
         </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script 
-        src="https://kit.fontawesome.com/0ca402662e.js" 
-        crossorigin="anonymous"
-        ></script>
+      <!-- Bootstrap JavaScript Libraries -->
+      <script 
+      src="https://kit.fontawesome.com/0ca402662e.js" 
+      crossorigin="anonymous"
+      ></script>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+      <script
+          src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+          integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+          crossorigin="anonymous"
+      ></script>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
+      <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+          integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+          crossorigin="anonymous"
+      ></script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Recipe, Category, SubCategory
+from .models import Recipe, Category, SubCategory, Review
 from django import forms
 
 class RegisterUserForm(UserCreationForm):
@@ -21,6 +21,7 @@ class RegisterUserForm(UserCreationForm):
 
 class RecipeForm(forms.ModelForm):
     Name = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={"class":"form-control mb-3"}), required=True)
+    author = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={"class":"form-control mb-3"}), required=True)
     description = forms.CharField(max_length = 600, widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
     ingredients = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
     instructions = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3"}), required=True)
@@ -29,4 +30,11 @@ class RecipeForm(forms.ModelForm):
 
     class Meta:
         model = Recipe
-        fields = ['Name', 'image', 'description', 'ingredients', 'instructions', 'category', 'subcategory']
+        fields = ['Name', 'author', 'image', 'description', 'ingredients', 'instructions', 'category', 'subcategory']
+
+class ReviewForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control mb-3", "rows" : "6", "cols" : "6" }), required=True)
+
+    class Meta:
+        model = Review
+        fields = ['content']
