@@ -44,15 +44,20 @@ def like_view_breakfast(request, recipe_id):
     return redirect(daily_recipes_breakfast_view)
 
 #Function that allows users to favourite/unfavourite recipes and refresh the page
-def add_favourite_breakfast(request, recipe_id):  
+def add_favourite_breakfast(request, recipe_id):
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to favourite a recipe.")
+        return redirect('TCC-login')
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
+    
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
     if not created:
-        messages.error(request, f"You have already got {recipe.Name} in your favorites. You can remove it below.")
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that allows users to make reviews to recipes and refresh the page
@@ -220,14 +225,19 @@ def like_view_lunch(request, recipe_id):
 
 #Function that allows users to favourite/unfavourite recipes and refresh the page
 def add_favourite_lunch(request, recipe_id):  
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to favourite a recipe.")
+        return redirect('TCC-login')
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
+    
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
     if not created:
-        messages.error(request, f"You have already got {recipe.Name} in your favorites. You can remove it below.")
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that will return the DailyDinner.html template, fetch relevant recipes from admin and render it to the browser
@@ -259,14 +269,19 @@ def like_view_dinner(request, recipe_id):
 
 #Function that allows users to favourite/unfavourite recipes and refresh the page
 def add_favourite_dinner(request, recipe_id):  
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to favourite a recipe.")
+        return redirect('TCC-login')
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
+    
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
     if not created:
-        messages.error(request, f"You have already got {recipe.Name} in your favorites. You can remove it below.")
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #View to edit a review
@@ -435,17 +450,16 @@ def add_favourite_dessert(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
-    
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
     
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
     if not created:
-        favorite.delete()
-        messages.error(request, f"You have removed {recipe.Name} from your favorites.")
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that will return the DailyDrinks.html template, fetch relevant recipes from admin and render it to the browser
@@ -548,17 +562,16 @@ def add_favourite_drinks(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
-    
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
     
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
     if not created:
-        favorite.delete()
-        messages.error(request, f"You have removed {recipe.Name} from your favorites.")
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that will return the H&DVegetarian.html template, fetch relevant recipes from admin and render it to the browser
@@ -660,19 +673,17 @@ def like_view_vegetarian(request, recipe_id):
 def add_favourite_vegetarian(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
-        return redirect('TCC-login')  # Redirect to login page if not logged in
-    
+        return redirect('TCC-login')
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
     
-    # Check if the recipe is already in the user's favorites
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
-    if not created:  # If the favorite already exists, remove it
-        favorite.delete()
-        messages.error(request, f"You have removed {recipe.Name} from your favorites.")
-    else:  # If the favorite did not exist, add it
+    if not created:
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+    else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that will return the H&DKeto.html template, fetch relevant recipes from admin and render it to the browser
@@ -774,19 +785,17 @@ def like_view_keto(request, recipe_id):
 def add_favourite_keto(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
-        return redirect('TCC-login')  # Redirect to login page if not logged in
-    
+        return redirect('TCC-login')
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
     
-    # Check if the recipe is already in the user's favorites
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
-    if not created:  # If the favorite already exists, remove it
-        favorite.delete()
-        messages.error(request, f"You have removed {recipe.Name} from your favorites.")
-    else:  # If the favorite did not exist, add it
+    if not created:
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+    else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that will return the HolidaysMD.html template, fetch relevant recipes from admin and render it to the browser
@@ -888,19 +897,17 @@ def like_view_md(request, recipe_id):
 def add_favourite_md(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
-        return redirect('TCC-login')  # Redirect to login page if not logged in
-    
+        return redirect('TCC-login')
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
     
-    # Check if the recipe is already in the user's favorites
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
-    if not created:  # If the favorite already exists, remove it
-        favorite.delete()
-        messages.error(request, f"You have removed {recipe.Name} from your favorites.")
-    else:  # If the favorite did not exist, add it
+    if not created:
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+    else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that will return the HolidaysNY.html template, fetch relevant recipes from admin and render it to the browser
@@ -1002,19 +1009,17 @@ def like_view_ny(request, recipe_id):
 def add_favourite_ny(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
-        return redirect('TCC-login')  # Redirect to login page if not logged in
-    
+        return redirect('TCC-login')
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
     
-    # Check if the recipe is already in the user's favorites
     favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
     
-    if not created:  # If the favorite already exists, remove it
-        favorite.delete()
-        messages.error(request, f"You have removed {recipe.Name} from your favorites.")
-    else:  # If the favorite did not exist, add it
+    if not created:
+        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+    else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
-    
+
     return redirect('recipe-book')
 
 #Function that will return the Login.html template and render it to the browser
