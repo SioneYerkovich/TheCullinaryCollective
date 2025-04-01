@@ -62,6 +62,9 @@ def add_favourite_breakfast(request, recipe_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_breakfast_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -179,6 +182,9 @@ def delete_review_lunch_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_lunch_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -189,20 +195,20 @@ def review_lunch_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('daily-recipes-lunch')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('daily-recipes-lunch')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('daily-recipes-lunch')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
@@ -324,6 +330,9 @@ def delete_review_dinner_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_dinner_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -334,22 +343,23 @@ def review_dinner_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('daily-recipes-dinner')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('daily-recipes-dinner')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('daily-recipes-dinner')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
+
 
 #Function that will return the DailyDessert.html template, fetch relevant recipes from admin and render it to the browser
 def daily_recipes_dessert_view(request):
@@ -401,6 +411,9 @@ def delete_review_dessert_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_dessert_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -411,20 +424,20 @@ def review_dessert_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('daily-recipes-dessert')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('daily-recipes-dessert')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('daily-recipes-dessert')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
@@ -513,6 +526,9 @@ def delete_review_drinks_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_drinks_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -523,22 +539,23 @@ def review_drinks_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('daily-recipes-drinks')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('daily-recipes-drinks')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('daily-recipes-drinks')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
+
 
 #Function that allows users to like/unlike dessert recipes and refresh the page
 def like_view_drinks(request, recipe_id):
@@ -625,6 +642,9 @@ def delete_review_vegetarian_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_vegetarian_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -635,22 +655,23 @@ def review_vegetarian_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('health-recipes-vegetarian')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('health-recipes-vegetarian')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('health-recipes-vegetarian')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
+
 
 #Function that allows users to like/unlike dessert recipes and refresh the page
 def like_view_vegetarian(request, recipe_id):
@@ -737,6 +758,9 @@ def delete_review_keto_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_keto_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -747,22 +771,23 @@ def review_keto_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('health-recipes-keto')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('health-recipes-keto')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('health-recipes-keto')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
+
 
 #Function that allows users to like/unlike dessert recipes and refresh the page
 def like_view_keto(request, recipe_id):
@@ -849,6 +874,9 @@ def delete_review_md_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_md_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -859,22 +887,23 @@ def review_md_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('holiday-recipes-MD')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('holiday-recipes-MD')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('holiday-recipes-MD')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
+
 
 #Function that allows users to like/unlike dessert recipes and refresh the page
 def like_view_md(request, recipe_id):
@@ -961,6 +990,9 @@ def delete_review_ny_view(request, recipe_id, review_id):
 
 #Function that allows users to make reviews to recipes and refresh the page
 def review_ny_view(request, recipe_id): 
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to leave a review.")
+        return redirect('TCC-login')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
     if request.method == 'POST':
@@ -971,22 +1003,23 @@ def review_ny_view(request, recipe_id):
 
             if existing_review:
                 messages.error(request, 'You have already reviewed this recipe.')
-                return redirect('holiday-recipes-NY')
+                return redirect('daily-recipes-breakfast')
             else:
                 review = form.save(commit=False)
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
                 messages.success(request, 'Your review has been added!')
-                return redirect('holiday-recipes-NY')
+                return redirect('daily-recipes-breakfast')
         else:
             messages.error(request, 'Please ensure all fields are filled correctly.')
-            return redirect('holiday-recipes-NY')
+            return redirect('daily-recipes-breakfast')
     
     else:
-        form = ReviewForm()
+        form = ReviewForm() 
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
+
 
 #Function that allows users to like/unlike dessert recipes and refresh the page
 def like_view_ny(request, recipe_id):
