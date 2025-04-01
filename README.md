@@ -33,8 +33,8 @@ To run the application, you must install the following:
 
 # ✍️ **Relevant documentation**
 1. User guide for new and existing users
-   
-[The Cullinary Collective (User guide).pdf](https://github.com/user-attachments/files/19542647/The.Cullinary.Collective.User.guide.pdf)
+[The Cullinary Collective (User guide).pdf](https://github.com/user-attachments/files/19543136/The.Cullinary.Collective.User.guide.pdf)
+
 
 2. Developer guide for programmers
 [The Cullinary Collective - FAQ's.pdf](https://github.com/user-attachments/files/19542648/The.Cullinary.Collective.-.FAQ.s.pdf)
