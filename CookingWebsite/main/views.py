@@ -43,7 +43,7 @@ def like_view_breakfast(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}. Thank you for supporting our community!")
     return redirect(daily_recipes_breakfast_view)
 
-#Function that allows users to favourite/unfavourite recipes and refresh the page
+#Function that allows users to favourite/unfavourite breakfast recipes and refresh the page
 def add_favourite_breakfast(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -58,9 +58,9 @@ def add_favourite_breakfast(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('daily-recipes-breakfast')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for breakfast recipes and refresh the page
 def review_breakfast_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -92,7 +92,7 @@ def review_breakfast_view(request, recipe_id):
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
-#View to edit a review
+#View to edit a breakfast review
 def edit_review_breakfast_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -116,7 +116,7 @@ def edit_review_breakfast_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a breakfast review
 def delete_review_breakfast_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -140,7 +140,7 @@ def daily_recipes_lunch_view(request):
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     return render(request, "main/DailyLunch.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
 
-#View to edit a review
+#View to edit a lunch review
 def edit_review_lunch_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -165,7 +165,7 @@ def edit_review_lunch_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a lunch review
 def delete_review_lunch_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -180,7 +180,7 @@ def delete_review_lunch_view(request, recipe_id, review_id):
         messages.success(request, "Your review has been deleted.")
         return redirect('daily-recipes-lunch')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for lunch recipes and refresh the page
 def review_lunch_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -229,7 +229,7 @@ def like_view_lunch(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}, thank you for supporting our community!")
     return redirect(daily_recipes_lunch_view)
 
-#Function that allows users to favourite/unfavourite recipes and refresh the page
+#Function that allows users to favourite/unfavourite lunch recipes and refresh the page
 def add_favourite_lunch(request, recipe_id):  
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -244,7 +244,7 @@ def add_favourite_lunch(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('daily-recipes-dinner')
 
 #Function that will return the DailyDinner.html template, fetch relevant recipes from admin and render it to the browser
 def daily_recipes_dinner_view(request):
@@ -273,7 +273,7 @@ def like_view_dinner(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}, thank you for supporting our community!")
     return redirect(daily_recipes_dinner_view)
 
-#Function that allows users to favourite/unfavourite recipes and refresh the page
+#Function that allows users to favourite/unfavourite dinner recipes and refresh the page
 def add_favourite_dinner(request, recipe_id):  
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -288,9 +288,9 @@ def add_favourite_dinner(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('daily-recipes-dinner')
 
-#View to edit a review
+#View to edit a dinner review
 def edit_review_dinner_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -314,7 +314,7 @@ def edit_review_dinner_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a dinner review
 def delete_review_dinner_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -328,7 +328,7 @@ def delete_review_dinner_view(request, recipe_id, review_id):
     messages.success(request, "Your review has been deleted.")
     return redirect('daily-recipes-dinner')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for dinner recipes and refresh the page
 def review_dinner_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -360,7 +360,6 @@ def review_dinner_view(request, recipe_id):
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
-
 #Function that will return the DailyDessert.html template, fetch relevant recipes from admin and render it to the browser
 def daily_recipes_dessert_view(request):
     fetchRecipes = Recipe.objects.filter(user__username = "admin", subcategory__type = "Dessert")
@@ -371,7 +370,7 @@ def daily_recipes_dessert_view(request):
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     return render(request, "main/DailyDessert.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
 
-#View to edit a review
+#View to edit a dessert review
 def edit_review_dessert_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -395,7 +394,7 @@ def edit_review_dessert_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a dessert review
 def delete_review_dessert_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -409,7 +408,7 @@ def delete_review_dessert_view(request, recipe_id, review_id):
     messages.success(request, "Your review has been deleted.")
     return redirect('daily-recipes-dessert')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for dessert recipes and refresh the page
 def review_dessert_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -473,7 +472,7 @@ def add_favourite_dessert(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('daily-recipes-dessert')
 
 #Function that will return the DailyDrinks.html template, fetch relevant recipes from admin and render it to the browser
 def daily_recipes_drinks_view(request):
@@ -485,7 +484,7 @@ def daily_recipes_drinks_view(request):
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     return render(request, "main/DailyDrinks.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
 
-#View to edit a review
+#View to edit a drinks review
 def edit_review_drinks_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -510,7 +509,7 @@ def edit_review_drinks_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a drinks review
 def delete_review_drinks_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -524,7 +523,7 @@ def delete_review_drinks_view(request, recipe_id, review_id):
     messages.success(request, "Your review has been deleted.")
     return redirect('daily-recipes-drinks')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for drinks recipes and refresh the page
 def review_drinks_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -556,8 +555,7 @@ def review_drinks_view(request, recipe_id):
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
-
-#Function that allows users to like/unlike dessert recipes and refresh the page
+#Function that allows users to like/unlike drinks recipes and refresh the page
 def like_view_drinks(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to like a recipe.")
@@ -574,7 +572,7 @@ def like_view_drinks(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}, thank you for supporting our community!")
     return redirect(daily_recipes_drinks_view)
 
-#Function that allows users to favourite/unfavourite dessert recipes and redirects to the recipe-book
+#Function that allows users to favourite/unfavourite drinks recipes and redirects to the recipe-book
 def add_favourite_drinks(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -589,7 +587,7 @@ def add_favourite_drinks(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('daily-recipes-drinks')
 
 #Function that will return the H&DVegetarian.html template, fetch relevant recipes from admin and render it to the browser
 def health_recipes_vegetarian_view(request):
@@ -601,7 +599,7 @@ def health_recipes_vegetarian_view(request):
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     return render(request, "main/H&DVegetarian.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
 
-#View to edit a review
+#View to edit a vegetarian review
 def edit_review_vegetarian_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -626,7 +624,7 @@ def edit_review_vegetarian_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a vegetarian review
 def delete_review_vegetarian_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -640,7 +638,7 @@ def delete_review_vegetarian_view(request, recipe_id, review_id):
     messages.success(request, "Your review has been deleted.")
     return redirect('health-recipes-vegetarian')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for vegetarian recipes and refresh the page
 def review_vegetarian_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -672,8 +670,7 @@ def review_vegetarian_view(request, recipe_id):
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
-
-#Function that allows users to like/unlike dessert recipes and refresh the page
+#Function that allows users to like/unlike vegetarian recipes and refresh the page
 def like_view_vegetarian(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to like a recipe.")
@@ -690,7 +687,7 @@ def like_view_vegetarian(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}, thank you for supporting our community!")
     return redirect(health_recipes_vegetarian_view)
 
-#Function that allows users to favourite/unfavourite dessert recipes and redirects to the recipe-book
+#Function that allows users to favourite/unfavourite vegetarian recipes and redirects to the recipe-book
 def add_favourite_vegetarian(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -705,7 +702,7 @@ def add_favourite_vegetarian(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('health-recipes-vegetarian')
 
 #Function that will return the H&DKeto.html template, fetch relevant recipes from admin and render it to the browser
 def health_recipes_keto_view(request):
@@ -717,7 +714,7 @@ def health_recipes_keto_view(request):
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     return render(request, "main/H&DKeto.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
 
-#View to edit a review
+#View to edit a keto review
 def edit_review_keto_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -742,7 +739,7 @@ def edit_review_keto_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a keto review
 def delete_review_keto_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -756,7 +753,7 @@ def delete_review_keto_view(request, recipe_id, review_id):
     messages.success(request, "Your review has been deleted.")
     return redirect('health-recipes-keto')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for keto recipes and refresh the page
 def review_keto_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -788,8 +785,7 @@ def review_keto_view(request, recipe_id):
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
-
-#Function that allows users to like/unlike dessert recipes and refresh the page
+#Function that allows users to like/unlike keto recipes and refresh the page
 def like_view_keto(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to like a recipe.")
@@ -806,7 +802,7 @@ def like_view_keto(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}, thank you for supporting our community!")
     return redirect(health_recipes_keto_view)
 
-#Function that allows users to favourite/unfavourite dessert recipes and redirects to the recipe-book
+#Function that allows users to favourite/unfavourite keto recipes and redirects to the recipe-book
 def add_favourite_keto(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -821,7 +817,7 @@ def add_favourite_keto(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('health-recipes-keto')
 
 #Function that will return the HolidaysMD.html template, fetch relevant recipes from admin and render it to the browser
 def holidays_md_view(request):
@@ -833,7 +829,7 @@ def holidays_md_view(request):
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     return render(request, "main/HolidaysMD.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
 
-#View to edit a review
+#View to edit a mothers day review
 def edit_review_md_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -858,7 +854,7 @@ def edit_review_md_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a mothers day review
 def delete_review_md_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -872,7 +868,7 @@ def delete_review_md_view(request, recipe_id, review_id):
     messages.success(request, "Your review has been deleted.")
     return redirect('holiday-recipes-MD')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for mothers day recipes and refresh the page
 def review_md_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -904,8 +900,7 @@ def review_md_view(request, recipe_id):
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
-
-#Function that allows users to like/unlike dessert recipes and refresh the page
+#Function that allows users to like/unlike mothers day recipes and refresh the page
 def like_view_md(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to like a recipe.")
@@ -922,7 +917,7 @@ def like_view_md(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}, thank you for supporting our community!")
     return redirect(holidays_md_view)
 
-#Function that allows users to favourite/unfavourite dessert recipes and redirects to the recipe-book
+#Function that allows users to favourite/unfavourite mothers day recipes and redirects to the recipe-book
 def add_favourite_md(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -937,7 +932,7 @@ def add_favourite_md(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('holiday-recipes-MD')
 
 #Function that will return the HolidaysNY.html template, fetch relevant recipes from admin and render it to the browser
 def holidays_ny_view(request):
@@ -949,7 +944,7 @@ def holidays_ny_view(request):
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     return render(request, "main/HolidaysNY.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
 
-#View to edit a review
+#View to edit a new years review
 def edit_review_ny_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id)
@@ -974,7 +969,7 @@ def edit_review_ny_view(request, recipe_id, review_id):
 
     return render(request, 'main/EditReview.html', {'review': review, 'recipe': recipe})
 
-#View to delete a review
+#View to delete a new years review
 def delete_review_ny_view(request, recipe_id, review_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     review = get_object_or_404(Review, id=review_id, recipe=recipe)
@@ -988,7 +983,7 @@ def delete_review_ny_view(request, recipe_id, review_id):
     messages.success(request, "Your review has been deleted.")
     return redirect('holiday-recipes-NY')
 
-#Function that allows users to make reviews to recipes and refresh the page
+#Function that allows users to make reviews for new years recipes and refresh the page
 def review_ny_view(request, recipe_id): 
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to leave a review.")
@@ -1020,8 +1015,7 @@ def review_ny_view(request, recipe_id):
 
     return render(request, 'main/Review.html', {'form': form, 'recipe': recipe})
 
-
-#Function that allows users to like/unlike dessert recipes and refresh the page
+#Function that allows users to like/unlike new years recipes and refresh the page
 def like_view_ny(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to like a recipe.")
@@ -1038,7 +1032,7 @@ def like_view_ny(request, recipe_id):
         messages.success(request, f"You liked the recipe: {recipe.Name}, thank you for supporting our community!")
     return redirect(holidays_ny_view)
 
-#Function that allows users to favourite/unfavourite dessert recipes and redirects to the recipe-book
+#Function that allows users to favourite/unfavourite new years recipes and redirects to the recipe-book
 def add_favourite_ny(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
@@ -1053,7 +1047,7 @@ def add_favourite_ny(request, recipe_id):
     else:
         messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('recipe-book')
+    return redirect('holiday-recipes-NY')
 
 #Function that will return the Login.html template and render it to the browser
 #if the user submits the form, it will validate the details and log in
