@@ -146,6 +146,26 @@
 
         <!-- This is the main section of the landing page-->
         <main>
+                      <!-- this is the alert message for success and error messages -->
+                      {% if messages %}
+                      {% for message in messages %}
+                          {% if message.tags == 'error' %}
+                          <div class="container mt-3">
+                              <div class="offset-2 col-8 alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                  {{ message }}
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                          </div>
+                          {% elif message.tags == 'success' %}
+                          <div class="container mt-3">
+                              <div class="offset-2 col-8 alert alert-success alert-dismissible fade show text-center" role="alert">
+                                  {{ message }}
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                          </div>
+                          {% endif %}
+                      {% endfor %}
+                      {% endif %}
             <!-- Landing page hero section -->
             <div class="col-xs-12" style="height:100px;">
             </div>

@@ -1064,6 +1064,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, "You have been logged in. Log out using the door in the top right corner.")
             return redirect('TCC-home')
         else:
             messages.error(request, ("Your details were incorrect or no such account exists."))
