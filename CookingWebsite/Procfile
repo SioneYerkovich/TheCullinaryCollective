@@ -1,1 +1,1 @@
-web: gunicorn TheCullinaryCollective.wsgi
+web: gunicorn TheCullinaryCollective.wsgi:application
