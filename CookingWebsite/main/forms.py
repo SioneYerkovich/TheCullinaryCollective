@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Recipe, Category, SubCategory, Review
 from django import forms
+from django.core.exceptions import ValidationError
 
 class RegisterUserForm(UserCreationForm):
     first_name = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={"class":"form-control mb-3"}))
@@ -18,6 +19,15 @@ class RegisterUserForm(UserCreationForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control mb-3'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+    def clean_email(self):
+        #From all of the submitted form data, retireve the email field data and store in the variable for checking
+        email = self.cleaned_data.get('email')
+        #Check if email already exists
+        if User.objects.filter(email=email).exists():
+            #if it exists, throw this error
+            raise ValidationError("This email address is already in use. Please use a different email.")
+        return email
 
 class RecipeForm(forms.ModelForm):
     Name = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={"class":"form-control mb-3"}), required=True)
