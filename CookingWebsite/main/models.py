@@ -25,6 +25,7 @@ class Recipe(models.Model):
         return self.Name
     
 #Category model
+#These can only be added and modified using django admin panel (navigate using domain url + /admin)
 class Category(models.Model):
     type = models.CharField(max_length=50)
 
@@ -32,6 +33,7 @@ class Category(models.Model):
         return self.type
 
 #SubCategory model
+#these can only be added and modified using django admin panel (navigate using domain url + /admin)
 class SubCategory(models.Model):
     type = models.CharField(max_length=50)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='subcategories')
@@ -40,11 +42,15 @@ class SubCategory(models.Model):
         return self.type
 
 class Review(models.Model):
+    #user who creates a review
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
+    #recipe they are reviewing
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='reviews') 
+    #review body content and timestamp (auto captured)
     content = models.TextField(max_length=200) 
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    #ensures users can only create one review per recipe
     class Meta:
         unique_together = ('user', 'recipe')
 
@@ -52,7 +58,9 @@ class Review(models.Model):
         return f"Review by {self.user.username} for {self.recipe.Name}"
     
 class Favourite(models.Model):
+    #user who adds a favourite
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourites')
+    #recipe they are favouriting
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='favourited_by')
 
     def __str__(self):
