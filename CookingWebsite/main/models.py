@@ -41,6 +41,7 @@ class SubCategory(models.Model):
     def __str__(self):
         return self.type
 
+#Review model
 class Review(models.Model):
     #user who creates a review
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
@@ -57,6 +58,7 @@ class Review(models.Model):
     def __str__(self):
         return f"Review by {self.user.username} for {self.recipe.Name}"
     
+#Favourite model
 class Favourite(models.Model):
     #user who adds a favourite
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourites')
