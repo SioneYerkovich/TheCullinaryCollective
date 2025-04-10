@@ -70,6 +70,12 @@ I navigated this by utilising my skillset in design and logic, one example of th
 
 It was clear from the outset that the sheer volume of features involved would require a planning strategy. It required in depth thinking about the challenges i'll face and how I tackle problems as an individual. I broke this down with the project management skills I have gained during my studies, creating a project roadmap that provided me with a quick reference whenever I was off track. The roadmap has been attached to this README below (The Cullinary Collective roadmap)
 
+# 💭 **Future Scope**
+
+-	Community section (populates user recipes into one localised area, providing a greater sense of contribution to the collective)
+- Attempt integration of social logins (Gmail, Facebook etc.)
+- Implement a dynamic community reviews section with user reviews as populated data
+
 
 # ✍️ **Relevant documentation**
 1. User guide for new and existing users
