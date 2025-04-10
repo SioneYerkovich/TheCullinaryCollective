@@ -61,7 +61,7 @@ Rule 2 Simplicity:
 Keeping it simple was extremely helpful, I believe its easy to get overwhelmed in the details when working at scale (This applies to both developers and the end-user). I wanted to ensure that I incorporated the features without "scaring" off the user due to high complexity and screen clutter (im looking at you pb tech). I navigated this by utilising my skillset in design and logic, one example of this is deciding to hide buttons until the parent element is hovered. This was a method of reducing screen clutter while also retaining those features. Another example is the idea of a modal for displaying details, as it can be confusing for the user when lots of redirections are involved. The modals popup interface allows the user to get what they need without the confusion a redirection causes.
 
 Rule 3 Planning:
-It was clear from the outset that the sheer volume of features involved would require a planning strategy. It required in depth thinking about the challenges i'll face and how I tackle problems as an individual. I broke this down with the project management skills I have gained during my studies, creating a project roadmap that provided me with a quick reference whenever I was off track. The roadmap has been attached to this README below ()
+It was clear from the outset that the sheer volume of features involved would require a planning strategy. It required in depth thinking about the challenges i'll face and how I tackle problems as an individual. I broke this down with the project management skills I have gained during my studies, creating a project roadmap that provided me with a quick reference whenever I was off track. The roadmap has been attached to this README below (The Cullinary Collective roadmap)
 
 
 # ✍️ **Relevant documentation**
@@ -71,6 +71,7 @@ It was clear from the outset that the sheer volume of features involved would re
 
 2. Developer guide for programmers
 [The Cullinary Collective - FAQ's.pdf](https://github.com/user-attachments/files/19542648/The.Cullinary.Collective.-.FAQ.s.pdf)
+
 
 3. The Cullinary Collective Roadmap
 [The Cullinary Collective roadmap.docx](https://github.com/user-attachments/files/19675837/The.Cullinary.Collective.roadmap.docx)
