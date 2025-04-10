@@ -66,7 +66,7 @@ It was clear from the outset that the sheer volume of features involved would re
 
 # ✍️ **Relevant documentation**
 1. User guide for new and existing users
-[The Cullinary Collective (User guide).pdf](https://github.com/user-attachments/files/19543136/The.Cullinary.Collective.User.guide.pdf)
+[The Cullinary Collective (User guide).pdf](https://github.com/user-attachments/files/19675908/The.Cullinary.Collective.User.guide.pdf)
 
 
 2. Developer guide for programmers
