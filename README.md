@@ -31,7 +31,7 @@ To run the application, you must install the following:
 - asgiref==3.8.1
 - dj-database-url==2.3.0
 - Django==5.1.7
-- django-heroku==0.3.1
+- django-on-heroku==1.1.2
 - django-widget-tweaks==1.5.0
 - gunicorn==23.0.0
 - packaging==24.2
