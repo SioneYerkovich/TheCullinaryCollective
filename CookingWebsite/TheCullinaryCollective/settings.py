@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_on_heroku
 import dj_database_url
 from decouple import config
 
@@ -29,7 +28,7 @@ SECRET_KEY = 'django-insecure-0=mt5c)7&97giw=q5sz0&7j(1pj7xwxc1ye-0_o0%bq8_q^ph3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['thecullinarycollective-c1ccb4b2c992.herokuapp.com']
 
 
 # Application definition
@@ -127,6 +126,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -151,5 +151,3 @@ EMAIL_HOST_USER = 'tcc.pwreset@gmail.com'
 # Your gmail app password
 EMAIL_HOST_PASSWORD = 'oggn ohis nhhc lvgq'
 #ppaognajd
-
-django_on_heroku.settings(locals())
