@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+import django_on_heroku
 import dj_database_url
 from decouple import config
 
@@ -152,4 +152,4 @@ EMAIL_HOST_USER = 'tcc.pwreset@gmail.com'
 EMAIL_HOST_PASSWORD = 'oggn ohis nhhc lvgq'
 #ppaognajd
 
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
