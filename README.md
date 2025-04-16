@@ -74,19 +74,24 @@ It was clear from the outset that the sheer volume of features involved would re
 
 ***Challenge 1: Deployment***
 
-During the deployment phase, I faced an issue with my deployment where the application domain was not rendering after the URL request is made. I discovered that i had to subscribe to a dyno plan in order to host the site (I was orginally lead to believe heroku was a free platform). However in my heroku dashboard i actually couldn't select a dyno plan, ***because "my procfile was not present"***
+During the deployment phase, I faced an issue with my deployment where the application domain was not rendering after the URL request is made. I discovered that i had to subscribe to a dyno plan in order to host the site (I was orginally lead to believe heroku was a free platform). However in my heroku dashboard i actually couldn't select a dyno plan because ***"my procfile was not present"***
 
 ***Solution***
+
 I decided to reverse engineer my deployment setup process, by making a "dummy" commit with heroku i was able to re-run the deployment script in my CLI and see where the error may be occuring. 
 
 This line became inherently clear:
+
 remote: -----> Discovering process types
+
 remote:        Procfile declares types -> (none)
 
 From here i realised my Procfile was never being received by heroku in the first place, because by default heroku searches only the root directory for it. My Procfile was contained in a subdirectory which made it unreachable. I relocated this file to the root to solve this issue.
 
 After making the change my deployment script became:
+
 remote: -----> Discovering process types
+
 remote:        Procfile declares types -> web
 
 I was now able to attach a dyno subscription for production.
