@@ -70,13 +70,13 @@ I navigated this by utilising my skillset in design and logic, one example of th
 
 It was clear from the outset that the sheer volume of features involved would require a planning strategy. It required in depth thinking about the challenges i'll face and how I tackle problems as an individual. I broke this down with the project management skills I have gained during my studies, creating a project roadmap that provided me with a quick reference whenever I was off track. The roadmap has been attached to this README below (The Cullinary Collective roadmap)
 
-# 💭 *Challenges & Solutions*
+# 🧩 *Challenges & Solutions*
 
 **Challenge 1: Deployment**
 
 During the deployment phase, I faced an issue with my deployment where the application domain was not rendering after the URL request is made. I discovered that i had to subscribe to a dyno plan in order to host the site (I was orginally lead to believe heroku was a free platform). However in my heroku dashboard i actually couldn't select a dyno plan because ***"my procfile was not present"***
 
-**Solution**
+💡 **Solution**
 
 I decided to reverse engineer my deployment setup process, by making a "dummy" commit with heroku i was able to re-run the deployment script in my CLI and see where the error may be occuring. 
 
