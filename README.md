@@ -1,4 +1,4 @@
-# ℹ️ **Overview**
+# ℹ️ *Overview*
 
 Welcome to The Cullinary Collective web application designed and developed by Sione Yerkovich. The purpose of this project is to improve upon the skills I have acquired during my studies and the development of previous personal projects, with the end result being a production ready application.
 
@@ -15,7 +15,7 @@ This application was designed as an interactive recipe forum/social media mesh, 
 9. Enhanced security features with user permissions and data protection.
 10. User friendly UI
 
-# 🚀 **Tech Stack**
+# 🚀 *Tech Stack*
 
 I built this site using Bootstrap, HTML, CSS, Python and Django.
 
@@ -25,7 +25,7 @@ I utilised ***HTML*** to build the overall skeleton of every component/page. Dja
 
 ***CSS and BOOTSTRAP*** allowed me to create user-friendly designs that adhere to various design principles.
 
-# 🌟 **Dependencies**
+# 🌟 *Dependencies*
 
 To run the application, you must install the following:
 - asgiref==3.8.1
@@ -49,47 +49,49 @@ When installing the dependencies for the project, it is highly recommended you p
 
 To install the dependencies, run the command: 'pip install -r requirements.txt' in a terminal of your choice.
 
-# 📖 **Learnings**
+# 📖 *Learnings*
 
 This project presented many learnings, one of the biggest involved the scale of the application. Navigating and understanding how every working part of the application linked together was a HUGE change of pace compared to my previous projects. It was clear from the outset that rules had to be put in place if I was going to do this efficiently.
 
-***Rule 1 Organisation:***
+**Rule 1 Organisation:**
 
 With so many moving parts I had to develop with structure. The easiest way to cut down development time is by making navigation and comprehension simple, right? This came down to even the smallest details, such as name variables for my urls and views.
 If I know that i'm creating a model containing objects with clear similarities, KEEP THE NAMING SIMILAR.
 
 For example my url paths, all the paths that would fall under the category of "Daily Recipes" have name variables assigned to them starting with "daily-recipes". This meant when i needed to utilize them to create a template or view redirection, i saved valuable time by not having to navigate to the url.py file to find the name variable. I could just think to myself "ok i know this page wants to redirect to the dinner template, so daily-recipes-dinner" etc. This rule had no limit and even helped me become efficient in writing fast, clear commit messages due to my templates having relative naming conventions, this rule was utilised wherever there were multiple relative parts.
 
-***Rule 2 Simplicity:***
+**Rule 2 Simplicity:**
 
 Keeping it simple was extremely helpful, I believe its easy to get overwhelmed in the details when working at scale (This applies to both developers and the end-user). I wanted to ensure that I incorporated the features without "scaring" off the user due to high complexity and screen clutter (im looking at you pb tech). 
 
 I navigated this by utilising my skillset in design and logic, one example of this is deciding to hide buttons until the parent element is hovered. This was a method of reducing screen clutter while also retaining those features. Another example is the idea of a modal for displaying details, as it can be confusing for the user when lots of redirections are involved. The modals popup interface allows the user to get what they need without the confusion a redirection causes.
 
-***Rule 3 Planning:***
+**Rule 3 Planning:**
 
 It was clear from the outset that the sheer volume of features involved would require a planning strategy. It required in depth thinking about the challenges i'll face and how I tackle problems as an individual. I broke this down with the project management skills I have gained during my studies, creating a project roadmap that provided me with a quick reference whenever I was off track. The roadmap has been attached to this README below (The Cullinary Collective roadmap)
 
-# 💭 **Challenges & Solutions**
+# 💭 *Challenges & Solutions*
 
-***Challenge 1: Deployment***
+**Challenge 1: Deployment**
 
 During the deployment phase, I faced an issue with my deployment where the application domain was not rendering after the URL request is made. I discovered that i had to subscribe to a dyno plan in order to host the site (I was orginally lead to believe heroku was a free platform). However in my heroku dashboard i actually couldn't select a dyno plan because ***"my procfile was not present"***
 
-***Solution***
+**Solution**
 
 I decided to reverse engineer my deployment setup process, by making a "dummy" commit with heroku i was able to re-run the deployment script in my CLI and see where the error may be occuring. 
 
-This line became inherently clear:
+*This line became inherently clear:*
 
 remote: -----> Discovering process types
+
 remote:        Procfile declares types -> (none)
 
 From here i realised my Procfile was never being received by heroku in the first place, because by default heroku searches only the root directory for it. My Procfile was contained in a subdirectory which made it unreachable. I relocated this file to the root to solve this issue.
 
-After making the change my deployment script became:
+*After making the change my deployment script became:*
 
 remote: -----> Discovering process types
+
 remote:        Procfile declares types -> web
 
 I was now able to attach a dyno subscription for production.
