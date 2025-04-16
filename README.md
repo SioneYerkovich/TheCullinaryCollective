@@ -83,7 +83,6 @@ I decided to reverse engineer my deployment setup process, by making a "dummy" c
 This line became inherently clear:
 
 remote: -----> Discovering process types
-
 remote:        Procfile declares types -> (none)
 
 From here i realised my Procfile was never being received by heroku in the first place, because by default heroku searches only the root directory for it. My Procfile was contained in a subdirectory which made it unreachable. I relocated this file to the root to solve this issue.
@@ -91,7 +90,6 @@ From here i realised my Procfile was never being received by heroku in the first
 After making the change my deployment script became:
 
 remote: -----> Discovering process types
-
 remote:        Procfile declares types -> web
 
 I was now able to attach a dyno subscription for production.
