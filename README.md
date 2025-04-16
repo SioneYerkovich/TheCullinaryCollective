@@ -49,9 +49,9 @@ When installing the dependencies for the project, it is highly recommended you p
 
 To install the dependencies, run the command: 'pip install -r requirements.txt' in a terminal of your choice.
 
-# 📖 **Challenges and/or learnings**
+# 📖 **Learnings**
 
-This project presented many challenges, one of the biggest challenges involved the scale of the application. Navigating and understanding how every working part of the application linked together was a HUGE change of pace compared to my previous projects. It was clear from the outset that rules had to be put in place if I was going to do this efficiently.
+This project presented many learnings, one of the biggest involved the scale of the application. Navigating and understanding how every working part of the application linked together was a HUGE change of pace compared to my previous projects. It was clear from the outset that rules had to be put in place if I was going to do this efficiently.
 
 ***Rule 1 Organisation:***
 
@@ -70,11 +70,33 @@ I navigated this by utilising my skillset in design and logic, one example of th
 
 It was clear from the outset that the sheer volume of features involved would require a planning strategy. It required in depth thinking about the challenges i'll face and how I tackle problems as an individual. I broke this down with the project management skills I have gained during my studies, creating a project roadmap that provided me with a quick reference whenever I was off track. The roadmap has been attached to this README below (The Cullinary Collective roadmap)
 
+# 💭 **Challenges & Solutions**
+
+***Challenge 1: Deployment***
+
+During the deployment phase, I faced an issue with my deployment where the application domain was not rendering after the URL request is made. I discovered that i had to subscribe to a dyno plan in order to host the site (I was orginally lead to believe heroku was a free platform). However in my heroku dashboard i actually couldn't select a dyno plan, ***because "my procfile was not present"***
+
+***Solution***
+I decided to reverse engineer my deployment setup process, by making a "dummy" commit with heroku i was able to re-run the deployment script in my CLI and see where the error may be occuring. 
+
+This line became inherently clear:
+remote: -----> Discovering process types
+remote:        Procfile declares types -> (none)
+
+From here i realised my Procfile was never being received by heroku in the first place, because by default heroku searches only the root directory for it. My Procfile was contained in a subdirectory which made it unreachable. I relocated this file to the root to solve this issue.
+
+After making the change my deployment script became:
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+
+I was now able to attach a dyno subscription for production.
+
 # 💭 **Future Scope**
 
 -	Community section (populates user recipes into one localised area, providing a greater sense of contribution to the collective)
 - Attempt integration of social logins (Gmail, Facebook etc.)
 - Implement a dynamic community reviews section with user reviews as populated data
+
 
 
 # ✍️ **Relevant documentation**
