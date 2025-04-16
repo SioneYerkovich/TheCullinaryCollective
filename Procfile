@@ -1,1 +1,1 @@
-web: gunicorn TheCullinaryCollective.wsgi --log-file -
+web: gunicorn CookingWebsite.TheCullinaryCollective.wsgi --log-file -
