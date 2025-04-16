@@ -80,7 +80,7 @@ During the deployment phase, I faced an issue with my deployment where the appli
 
 I decided to reverse engineer my deployment setup process, by making a "dummy" commit with heroku i was able to re-run the deployment script in my CLI and see where the error may be occuring. 
 
-*This line became inherently clear:*
+***This line became inherently clear:***
 
 remote: -----> Discovering process types
 
@@ -88,7 +88,7 @@ remote:        Procfile declares types -> (none)
 
 From here i realised my Procfile was never being received by heroku in the first place, because by default heroku searches only the root directory for it. My Procfile was contained in a subdirectory which made it unreachable. I relocated this file to the root to solve this issue.
 
-*After making the change my deployment script became:*
+***After making the change my deployment script became:***
 
 remote: -----> Discovering process types
 
