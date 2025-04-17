@@ -21,4 +21,5 @@ tzdata==2025.1
 urllib3==2.4.0
 whitenoise==6.9.0
 ECHO is on.
-# force rebuild
+# force rebuildcloudinary==1.44.0 
+django-cloudinary-storage==0.3.0 
