@@ -28,7 +28,10 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['thecullinarycollective-c1ccb4b2c992.herokuapp.com']
+ALLOWED_HOSTS = ['thecullinarycollective-c1ccb4b2c992.herokuapp.com',
+                 'localhost',
+                '127.0.0.1'
+                ]
 
 # Application definition
 
@@ -162,5 +165,5 @@ EMAIL_USE_TLS = True
 # Your email address
 EMAIL_HOST_USER = 'tcc.pwreset@gmail.com'  
 # Your gmail app password
-EMAIL_HOST_PASSWORD = 'oggn ohis nhhc lvgq'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 #ppaognajd
