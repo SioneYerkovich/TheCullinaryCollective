@@ -10,7 +10,7 @@ class Recipe(models.Model):
 
     #details of the recipe
     Name = models.CharField(max_length=100)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='recipes/')
     author = models.TextField(max_length=50)
     description = models.TextField(max_length=600)
     ingredients = models.TextField()

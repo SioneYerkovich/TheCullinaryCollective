@@ -168,6 +168,3 @@ EMAIL_HOST_USER = 'tcc.pwreset@gmail.com'
 # Your gmail app password
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 #ppaognajd
-
-from django.conf import settings
-print(settings.DEFAULT_FILE_STORAGE)
