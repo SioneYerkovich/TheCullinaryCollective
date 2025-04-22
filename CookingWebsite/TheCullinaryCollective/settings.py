@@ -33,10 +33,19 @@ ALLOWED_HOSTS = ['thecullinarycollective-c1ccb4b2c992.herokuapp.com',
                 '127.0.0.1'
                 ]
 
+# Cloudinary config files for decoupling (inside .env file)
+CLOUDINARY_CLOUD_NAME = config('CLOUDINARY_CLOUD_NAME')
+CLOUDINARY_API_KEY = config('CLOUDINARY_API_KEY')
+CLOUDINARY_API_SECRET = config('CLOUDINARY_API_SECRET')
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Application definition
 
 INSTALLED_APPS = [
     'main',
+    'cloudinary',
+    'cloudinary_storage',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
