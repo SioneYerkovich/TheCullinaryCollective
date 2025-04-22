@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import dj_database_url
 from decouple import config
+import cloudinary.uploader
+import cloudinary.api	
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,11 +40,11 @@ CLOUDINARY_CLOUD_NAME = config('CLOUDINARY_CLOUD_NAME')
 CLOUDINARY_API_KEY   = config('CLOUDINARY_API_KEY')
 CLOUDINARY_API_SECRET= config('CLOUDINARY_API_SECRET')
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': config('CLOUDINARY_API_KEY'),
-    'API_SECRET': config('CLOUDINARY_API_SECRET'),
-}
+cloudinary.config( 
+  	cloud_name = "djihnsfj9",
+  	api_key = "783452188153596",
+  	api_secret = "hLXSQfm_KgpmSjql19ut_Ooqfwk"
+)
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
