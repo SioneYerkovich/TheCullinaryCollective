@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -10,7 +11,7 @@ class Recipe(models.Model):
 
     #details of the recipe
     Name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='recipes/')
+    image = CloudinaryField('image')#image = models.ImageField(upload_to='recipes/')
     author = models.TextField(max_length=50)
     description = models.TextField(max_length=600)
     ingredients = models.TextField()
