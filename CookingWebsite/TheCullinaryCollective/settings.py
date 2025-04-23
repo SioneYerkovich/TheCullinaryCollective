@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['thecullinarycollective-c1ccb4b2c992.herokuapp.com',
                 ]
 
 # Cloudinary config files for decoupling (inside .env file)
+
 cloudinary.config( 
   	cloud_name = "djihnsfj9",
   	api_key = "783452188153596",
