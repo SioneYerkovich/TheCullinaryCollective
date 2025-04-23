@@ -115,7 +115,7 @@ I was now able to attach a dyno subscription for production.
 - Attempt integration of social logins (Gmail, Facebook etc.)
 - Implement a dynamic community reviews section with user reviews as populated data
 - Create filters for user recipes contained within the recipe book
-
+- Create a my reviews section for users to see and change their existing reviews (on top of the already existing method)
 
 # ✍️ **Relevant documentation**
 1. User guide for new and existing users
