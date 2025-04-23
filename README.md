@@ -15,13 +15,17 @@ This application was designed as an interactive recipe forum/social media mesh, 
 9. Enhanced security features (CSRF tokens, password hashing etc.) with user permissions and data protection.
 10. User friendly UI
 
-**I did not achieve everything i set out over the 4 week timeframe, however after the deadline I continue to develop and have enhanced the application with the following:**
+**I did not achieve everything set out over the 4 week timeframe(see Relevant documentation: The Cullinary Collective Roadmap)**
+
+**however after the deadline I continue to develop and have enhanced the application with the following:**
+
 1. Persistent production ready PostgreSQL database (converted from the former SQLite database)
 2. Integrated external image hosting using Cloudinary for dynamic image rendering
 3. Created unit tests for crucial features
 4. Deployed to Heroku, this included app setting configuration, CLI scripting and file formatting for complete integration
 
 **Click the link below to explore The Cullinary Collective**
+
 https://thecullinarycollective-c1ccb4b2c992.herokuapp.com/
 
 # 🚀 *Tech Stack*
