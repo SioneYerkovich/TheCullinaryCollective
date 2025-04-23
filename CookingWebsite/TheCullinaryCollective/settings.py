@@ -104,8 +104,12 @@ DATABASES = {
 }
 
 #Override with Postgres if DATABASE_URL exists (on Heroku)
-#if 'DATABASE_URL' in os.environ:
-#    DATABASES['default'] = dj_database_url.config()
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        default=os.environ['DATABASE_URL'],
+        conn_max_age=600,
+        ssl_require=True
+    )
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
