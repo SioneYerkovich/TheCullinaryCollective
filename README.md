@@ -12,7 +12,7 @@ This application was designed as an interactive recipe forum/social media mesh, 
 6. Like system: users can engage with the community by liking recipes, this is tallied and displayed with the recipe details
 7. Review feature: Submit reviews for recipes you love, or think need some improvement
 8. Favourites: Users can favourite recipes for quick access. These are added to the favourites section in The Recipe Book
-9. Enhanced security features (CSRF tokens, password hashing etc.) with user permissions and data protection.
+9. Enhanced security features (CSRF tokens, password hashing, SSH keys etc.) with user permissions and data protection.
 10. User friendly UI
 
 **I did not achieve everything set out over the 4 week timeframe (see Relevant documentation: The Cullinary Collective Roadmap)**
