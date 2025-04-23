@@ -15,7 +15,7 @@ This application was designed as an interactive recipe forum/social media mesh, 
 9. Enhanced security features (CSRF tokens, password hashing etc.) with user permissions and data protection.
 10. User friendly UI
 
-**I did not achieve everything set out over the 4 week timeframe(see Relevant documentation: The Cullinary Collective Roadmap)**
+**I did not achieve everything set out over the 4 week timeframe (see Relevant documentation: The Cullinary Collective Roadmap)**
 
 **however after the deadline I continue to develop and have enhanced the application with the following:**
 
