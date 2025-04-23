@@ -12,8 +12,21 @@ This application was designed as an interactive recipe forum/social media mesh, 
 6. Like system: users can engage with the community by liking recipes, this is tallied and displayed with the recipe details
 7. Review feature: Submit reviews for recipes you love, or think need some improvement
 8. Favourites: Users can favourite recipes for quick access. These are added to the favourites section in The Recipe Book
-9. Enhanced security features with user permissions and data protection.
+9. Enhanced security features (CSRF tokens, password hashing, SSH keys etc.) with user permissions and data protection.
 10. User friendly UI
+
+**I did not achieve everything set out over the 4 week timeframe (see Relevant documentation: The Cullinary Collective Roadmap)**
+
+**however after the deadline I continue to develop and have enhanced the application with the following:**
+
+1. Persistent production ready PostgreSQL database (converted from the former SQLite database)
+2. Integrated external image hosting using Cloudinary for dynamic image rendering
+3. Created unit tests for crucial features
+4. Deployed to Heroku, this included app setting configuration, CLI scripting and file formatting for complete integration
+
+**Click the link below to explore The Cullinary Collective**
+
+https://thecullinarycollective-c1ccb4b2c992.herokuapp.com/
 
 # 🚀 *Tech Stack*
 
@@ -101,8 +114,8 @@ I was now able to attach a dyno subscription for production.
 -	Community section (populates user recipes into one localised area, providing a greater sense of contribution to the collective)
 - Attempt integration of social logins (Gmail, Facebook etc.)
 - Implement a dynamic community reviews section with user reviews as populated data
-
-
+- Create filters for user recipes contained within the recipe book
+- Create a my reviews section for users to see and change their existing reviews (on top of the already existing method)
 
 # ✍️ **Relevant documentation**
 1. User guide for new and existing users
