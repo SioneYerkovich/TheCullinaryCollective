@@ -233,14 +233,23 @@
                                             </div>
                                             {% endif %}
                                     </form>
-                                    <form action="{% url 'add-favourite-vegetarian' recipe.id %}" method="POST">
+                                    <form action="{% url 'toggle-favourite-vegetarian' recipe.id %}" method="POST">
                                         {% csrf_token %}
+                                        {% if recipe in favourite_recipes %}
+                                            <div class="col-6 mt-2">
+                                                <button class="border-0 bg-white text-primary p-0" type="submit" name="recipe_id" value="{{ recipe.id }}">
+                                                    <i class="fa-solid fa-bookmark mx-4 fs-4 change"></i>
+                                                    <p>Unfavourite</p>
+                                                </button>
+                                            </div>
+                                            {% else %}
                                             <div class="col-6 mt-2">
                                                 <button class="border-0 bg-white text-primary p-0" type="submit" name="recipe_id" value="{{ recipe.id }}">
                                                     <i class="fa-regular fa-bookmark mx-4 fs-4 change"></i>
                                                     <p>Favourite</p>
                                                 </button>
                                             </div>
+                                        {% endif %}
                                     </form>
                                     <a href="{% url 'add-review-vegetarian' recipe.id %}">
                                         {% csrf_token %}

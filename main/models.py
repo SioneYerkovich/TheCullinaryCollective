@@ -17,6 +17,7 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     instructions = models.TextField()
     likes = models.ManyToManyField(User, related_name='likes')
+    favourited_by = models.ManyToManyField(User, related_name='favourite_recipes', blank=True)
 
     #connections to the category hierarchy
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL)
@@ -58,13 +59,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review by {self.user.username} for {self.recipe.Name}"
-    
-#Favourite model
-class Favourite(models.Model):
-    #user who adds a favourite
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourites')
-    #recipe they are favouriting
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='favourited_by')
-
-    def __str__(self):
-        return f"{self.user.username} favourited {self.recipe.Name}"

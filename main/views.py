@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, RecipeForm, ReviewForm
 from django.contrib.auth import views as auth_views
-from .models import Recipe, Review, Favourite
+from .models import Recipe, Review
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -22,11 +22,12 @@ def daily_recipes_breakfast_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
     
 
-    return render(request, "main/DailyBreakfast.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/DailyBreakfast.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #Function that allows users to like/unlike breakfast recipes and refresh the page
 def like_view_breakfast(request, recipe_id):
@@ -44,19 +45,19 @@ def like_view_breakfast(request, recipe_id):
     return redirect(daily_recipes_breakfast_view)
 
 #Function that allows users to favourite/unfavourite breakfast recipes and refresh the page
-def add_favourite_breakfast(request, recipe_id):
+def toggle_favourite_breakfast(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('daily-recipes-breakfast')
 
@@ -136,9 +137,10 @@ def daily_recipes_lunch_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/DailyLunch.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/DailyLunch.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a lunch review
 def edit_review_lunch_view(request, recipe_id, review_id):
@@ -230,21 +232,21 @@ def like_view_lunch(request, recipe_id):
     return redirect(daily_recipes_lunch_view)
 
 #Function that allows users to favourite/unfavourite lunch recipes and refresh the page
-def add_favourite_lunch(request, recipe_id):  
+def toggle_favourite_lunch(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
-    else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
 
-    return redirect('daily-recipes-dinner')
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
+    else:
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
+
+    return redirect('daily-recipes-lunch')
 
 #Function that will return the DailyDinner.html template, fetch relevant recipes from admin and render it to the browser
 def daily_recipes_dinner_view(request):
@@ -252,9 +254,10 @@ def daily_recipes_dinner_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/DailyDinner.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/DailyDinner.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #Function that allows users to like/unlike dinner recipes and refresh the page
 def like_view_dinner(request, recipe_id):
@@ -274,19 +277,19 @@ def like_view_dinner(request, recipe_id):
     return redirect(daily_recipes_dinner_view)
 
 #Function that allows users to favourite/unfavourite dinner recipes and refresh the page
-def add_favourite_dinner(request, recipe_id):  
+def toggle_favourite_dinner(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('daily-recipes-dinner')
 
@@ -366,9 +369,10 @@ def daily_recipes_dessert_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/DailyDessert.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/DailyDessert.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a dessert review
 def edit_review_dessert_view(request, recipe_id, review_id):
@@ -458,19 +462,19 @@ def like_view_dessert(request, recipe_id):
     return redirect(daily_recipes_dessert_view)
 
 #Function that allows users to favourite/unfavourite dessert recipes and redirects to the recipe-book
-def add_favourite_dessert(request, recipe_id):
+def toggle_favourite_dessert(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('daily-recipes-dessert')
 
@@ -480,9 +484,10 @@ def daily_recipes_drinks_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/DailyDrinks.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/DailyDrinks.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a drinks review
 def edit_review_drinks_view(request, recipe_id, review_id):
@@ -573,19 +578,19 @@ def like_view_drinks(request, recipe_id):
     return redirect(daily_recipes_drinks_view)
 
 #Function that allows users to favourite/unfavourite drinks recipes and redirects to the recipe-book
-def add_favourite_drinks(request, recipe_id):
+def toggle_favourite_drinks(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('daily-recipes-drinks')
 
@@ -595,9 +600,10 @@ def health_recipes_vegetarian_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/H&DVegetarian.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/H&DVegetarian.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a vegetarian review
 def edit_review_vegetarian_view(request, recipe_id, review_id):
@@ -688,19 +694,19 @@ def like_view_vegetarian(request, recipe_id):
     return redirect(health_recipes_vegetarian_view)
 
 #Function that allows users to favourite/unfavourite vegetarian recipes and redirects to the recipe-book
-def add_favourite_vegetarian(request, recipe_id):
+def toggle_favourite_vegetarian(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('health-recipes-vegetarian')
 
@@ -710,9 +716,10 @@ def health_recipes_keto_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/H&DKeto.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/H&DKeto.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a keto review
 def edit_review_keto_view(request, recipe_id, review_id):
@@ -803,19 +810,19 @@ def like_view_keto(request, recipe_id):
     return redirect(health_recipes_keto_view)
 
 #Function that allows users to favourite/unfavourite keto recipes and redirects to the recipe-book
-def add_favourite_keto(request, recipe_id):
+def toggle_favourite_keto(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('health-recipes-keto')
 
@@ -825,9 +832,10 @@ def holidays_md_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/HolidaysMD.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/HolidaysMD.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a mothers day review
 def edit_review_md_view(request, recipe_id, review_id):
@@ -918,19 +926,19 @@ def like_view_md(request, recipe_id):
     return redirect(holidays_md_view)
 
 #Function that allows users to favourite/unfavourite mothers day recipes and redirects to the recipe-book
-def add_favourite_md(request, recipe_id):
+def toggle_favourite_md(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('holiday-recipes-MD')
 
@@ -940,9 +948,10 @@ def holidays_ny_view(request):
     fetchReviews = Review.objects.filter(recipe__in=fetchRecipes)
     if request.user.is_authenticated:
         liked_recipes = request.user.likes.all()
+        favourite_recipes = request.user.favourite_recipes.all()
     else:
         liked_recipes = getattr(request.user, 'liked_recipes', None)
-    return render(request, "main/HolidaysNY.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes})
+    return render(request, "main/HolidaysNY.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a new years review
 def edit_review_ny_view(request, recipe_id, review_id):
@@ -1033,19 +1042,19 @@ def like_view_ny(request, recipe_id):
     return redirect(holidays_ny_view)
 
 #Function that allows users to favourite/unfavourite new years recipes and redirects to the recipe-book
-def add_favourite_ny(request, recipe_id):
+def toggle_favourite_ny(request, recipe_id):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to favourite a recipe.")
         return redirect('TCC-login')
 
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        messages.error(request, f"You already have {recipe.Name} in your favorites.")
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You removed {recipe.Name} from your favourites.")
     else:
-        messages.success(request, f"You have added {recipe.Name} to your favorites.")
+        recipe.favourited_by.add(request.user)
+        messages.success(request, f"You added {recipe.Name} to your favourites.")
 
     return redirect('holiday-recipes-NY')
 
@@ -1105,9 +1114,7 @@ def recipe_book_view(request):
     if request.user.is_authenticated:
         user_recipes = Recipe.objects.filter(user=request.user)
         #Get all recipes that the user has favorited
-        favourites = Favourite.objects.filter(user=request.user)
-        #Fetch the recipes associated with the favorites
-        favorite_recipes = [favourite.recipe for favourite in favourites]
+        favorite_recipes = request.user.favourite_recipes.all()
         #No recipes are fetched for non-logged-in users
     else:
         favorite_recipes = []
