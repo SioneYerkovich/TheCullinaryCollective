@@ -1125,12 +1125,11 @@ def recipe_book_view(request):
 #Function that allows users to unfavourite recipes inside of the recipe book and refresh the page
 def remove_favourite_recipebook(request, recipe_id):  
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    favorite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
-    
-    if not created:
-        favorite.delete()
-        messages.error(request, f"You have removed {recipe.Name} from your favorites.")
-    
+
+    if request.user in recipe.favourited_by.all():
+        recipe.favourited_by.remove(request.user)
+        messages.error(request, f"You have removed {recipe.Name} from your favourites.")
+
     return redirect('recipe-book')
 
 #Function that allows users to edit recipes from the recipe book, then redirect back to the recipe book
