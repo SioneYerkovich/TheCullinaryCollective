@@ -24,7 +24,8 @@ def daily_recipes_breakfast_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     
 
     return render(request, "main/DailyBreakfast.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
@@ -139,7 +140,8 @@ def daily_recipes_lunch_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/DailyLunch.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a lunch review
@@ -256,7 +258,8 @@ def daily_recipes_dinner_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/DailyDinner.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #Function that allows users to like/unlike dinner recipes and refresh the page
@@ -371,7 +374,8 @@ def daily_recipes_dessert_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/DailyDessert.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a dessert review
@@ -486,7 +490,8 @@ def daily_recipes_drinks_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/DailyDrinks.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a drinks review
@@ -602,7 +607,8 @@ def health_recipes_vegetarian_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/H&DVegetarian.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a vegetarian review
@@ -718,7 +724,8 @@ def health_recipes_keto_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/H&DKeto.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a keto review
@@ -834,7 +841,8 @@ def holidays_md_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/HolidaysMD.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a mothers day review
@@ -950,7 +958,8 @@ def holidays_ny_view(request):
         liked_recipes = request.user.likes.all()
         favourite_recipes = request.user.favourite_recipes.all()
     else:
-        liked_recipes = getattr(request.user, 'liked_recipes', None)
+        liked_recipes = None
+        favourite_recipes = None
     return render(request, "main/HolidaysNY.html", {'recipes': fetchRecipes, 'reviews' : fetchReviews, 'liked_recipes': liked_recipes, 'favourite_recipes': favourite_recipes})
 
 #View to edit a new years review
